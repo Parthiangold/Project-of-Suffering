@@ -10,21 +10,17 @@ targetCompatibility = 24
 
 group = 'org.example'
 version = '0.0.1 Alpha'
+mainClassName = org.example.JavaFxMain
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
 
 javafx {
-    version = "24"
+    version = "24.0.1"
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-test {
-    useJUnitPlatform()
+application {
+    mainClas.set("org.example.JavaFxMain")
 }
-
 
 repositories {
     mavenCentral()

@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Base Objects">
+    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Updates to build.gradle">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/JavaFxMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CustomerManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CustomerManagementSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TravelClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TravelClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +53,9 @@
     "accountId": "6cabaef6-ce66-44ca-9ebd-3504a7e060b2"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -62,7 +72,11 @@
     "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/javafx-sdk-24.0.1/lib",
     "onboarding.tips.debug.path": "C:/Users/nathf_fzn2ofq/IdeaProjects/Project-of-Suffering/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
@@ -91,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746838232287</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updates to build.gradle">
+      <option name="closed" value="true" />
+      <created>1746839172575</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746839172575</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,17 +141,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base Objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base Objects" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Updates to build.gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to build.gradle" />
   </component>
 </project>
