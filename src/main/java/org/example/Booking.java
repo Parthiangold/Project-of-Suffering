@@ -13,8 +13,28 @@ public class Booking {
     private Flight bookedFlight;
     private String[] bookedSeats;
     private boolean inFlightWiFi;
-
+    private boolean inFlightFoodAndDrinks;
 
     //Empty constructor class
+    public Booking () {}
+
+    // Constructor class
+    public Booking(int adultAmount, int childAmount, double price, String bookingDate, String dateTime, String email, int bookingNo, int customerNo, Flight bookedFlight, String[] bookedSeats, boolean inFlightWiFi, boolean inFlightFoodAndDrinks) {
+        this.adultAmount = adultAmount;
+        this.childAmount = childAmount;
+        this.price = price;
+        this.bookingDate = bookingDate;
+        this.dateTime = dateTime;
+        this.email = email;
+        this.bookingNo = bookingNo;
+        this.customerNo = customerNo;
+        this.bookedFlight = bookedFlight;
+        this.bookedSeats = bookedSeats;
+        this.inFlightWiFi = inFlightWiFi;
+        this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
+    }
+
+
+
 
 }
