@@ -1,8 +1,9 @@
+package org.example;
+
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-package org.example;
-// test
+
 public class Customer {
     private int customerNo;
     private String name, email, address, password;
