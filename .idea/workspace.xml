@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Updates to build.gradle">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/JavaFxMain.java" afterDir="false" />
+    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Updates to file locations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CustomerManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CustomerManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TravelClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TravelClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/JavaFxMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/JavaFxMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746839172575</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updates to file locations">
+      <option name="closed" value="true" />
+      <created>1746841385881</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746841385881</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +145,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base Objects" />
     <MESSAGE value="Updates to build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to build.gradle" />
+    <MESSAGE value="Updates to file locations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to file locations" />
   </component>
 </project>
