@@ -29,4 +29,21 @@ public class Flight {
         this.totalDuration = totalDuration;
         this.aircraftType = aircraftType;
     }
+
+    // getDepartureDestination method
+    public String getDepartureDestination() {
+        return departureDestination;
+    }
+
+    public String getArrivalDestination() {
+        return arrivalDestination;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public String toString(Formatter formatter){
+        return String.valueOf(formatter.format(String.valueOf(this)));
+    }
 }
