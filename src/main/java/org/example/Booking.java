@@ -34,7 +34,17 @@ public class Booking {
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
     }
 
+    // Get Booking number method
+    public int getBookingNo() {
+        return bookingNo;
+    }
+    // Get email method
+    public String getEmail() {
+        return email;
+    }
+    public String toString(Formatter formatter) {
+        return String.valueOf(formatter.format(String.valueOf(this)));
 
-
+    }
 
 }
