@@ -19,7 +19,7 @@ javafx {
 }
 
 application {
-    mainClas.set("org.example.JavaFxMain")
+    mainClass.set("org.example.JavaFxMain")
 }
 
 repositories {

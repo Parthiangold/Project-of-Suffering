@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Updates to build.gradle">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/JavaFxMain.java" afterDir="false" />
+    <list default="true" id="4640ea04-b184-4c0c-b996-285bebdf0eb7" name="Changes" comment="Flight.java has attributes and constructor classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CustomerManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/CustomerManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TravelClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TravelClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Flight.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +32,11 @@
         <option name="title" value="All" />
       </GitPushTagMode>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
@@ -51,6 +49,16 @@
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Parthiangold/Project-of-Suffering.git",
     "accountId": "6cabaef6-ce66-44ca-9ebd-3504a7e060b2"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "Parthiangold",
+    "repository": "Project-of-Suffering"
   }
 }]]></component>
   <component name="ProblemsViewState">
@@ -69,7 +77,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "#5 on NF",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/javafx-sdk-24.0.1/lib",
@@ -113,7 +121,47 @@
       <option name="project" value="LOCAL" />
       <updated>1746839172575</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updates to file locations">
+      <option name="closed" value="true" />
+      <created>1746841385881</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746841385881</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Working on Booking.java">
+      <option name="closed" value="true" />
+      <created>1746843615917</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746843615917</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added base constructor and parameterised constructor">
+      <option name="closed" value="true" />
+      <created>1746846527411</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746846527411</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added methods to Booking.java">
+      <option name="closed" value="true" />
+      <created>1746848031894</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746848031894</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Flight.java has attributes and constructor classes">
+      <option name="closed" value="true" />
+      <created>1746849277497</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1746849277497</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,7 +175,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="origin/NF" />
                       </list>
                     </value>
                   </entry>
@@ -142,6 +190,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Base Objects" />
     <MESSAGE value="Updates to build.gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to build.gradle" />
+    <MESSAGE value="Updates to file locations" />
+    <MESSAGE value="Working on Booking.java" />
+    <MESSAGE value="Added base constructor and parameterised constructor" />
+    <MESSAGE value="Added methods to Booking.java" />
+    <MESSAGE value="Flight.java has attributes and constructor classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flight.java has attributes and constructor classes" />
   </component>
 </project>
