@@ -32,6 +32,10 @@ public class Customer {
         return this.email;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
     // Returns the "customerNo" of the object
     public int getCustomerNo() {
         return this.customerNo;
