@@ -103,6 +103,43 @@ public class CustomerManagementSystem {
         }
     }
 
+    public void menu(Scanner input) {
+        boolean done = false;
+        while(! done) {
+            // Menu message that is presented at the start of each loop
+            System.out.println("\nWelcome to the FlyDreamAir Customer Management System.\n");
+            System.out.println("Input an option below (0-2):\n");
+            System.out.println("\t1. Search and book a flight.");
+            System.out.println("\t2. Manage flight bookings.");
+            System.out.println("\t0. Exit program.");
+            
+            // Switch cases are based on the input provided by the user
+            String menuInput = input.nextLine();
+            switch(menuInput) {
+                // Option 1 - Search and book a flight
+                case "1":
+                    System.out.println("i wish i could search and book a flight out of this group project on jah :fire: :fire:");
+                    break;
+                
+                // Option 2 - Manage flight bookings
+                case "2":
+                    System.out.println("managing these flights will be easier than managing this project ong :fire: :fire:");
+                    break;
+                
+                // Option 0 - Exit program
+                case "0":
+                    System.out.println("The program will proceed to exit");
+                    done = true;
+                    break;
+                
+                // Error message if invalid menu input
+                default:
+                    System.out.println("\"" + menuInput + "\" is not a valid input. Try again.");
+                    break;
+            }
+        }
+    }
+
     public static void main(String[] args) { 
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
@@ -117,7 +154,7 @@ public class CustomerManagementSystem {
 
         /*cms.loadBookings(); */
 
-        /*cms.menu(); */
+        cms.menu(input);
 
         // User input closes when program is terminating
         input.close();
