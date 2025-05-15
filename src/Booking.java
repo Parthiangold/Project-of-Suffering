@@ -91,4 +91,16 @@ public class Booking implements MyFileIO {
         return bookingNo;
     }
 
+    //Setter method for seat listing
+    public void setBookedSeats(String[] seats) {
+        bookedSeats = seats;
+    }
+
+    //Setter method for seat classifications
+    public void setSeatClassType(String seatType) {
+        seatClassType = seatType;
+    }
+
+    //Setter method for whether customer purchased Wi-Fi perks
+
 }
