@@ -2,31 +2,30 @@ import java.util.*;
 
 public class Seating {
     private String flightNo, seatClassType;
-    private int availableNo;
     private double adultPricing, childPricing;
-    private ArrayList<String> availableSeats;
+    private ArrayList<String> availableSeats = new ArrayList<String>();
+    private int availableNo;
 
     // Default constructors initialise class and attributes
     public Seating() {}
-    public Seating(String fN, String sCT, int aN, double aP, double cP, String[] aS) {
+    public Seating(String fN, String sCT, double aP, double cP, int aN) {
         this.flightNo = fN;
         this.seatClassType = sCT;
-        this.availableNo = aN;
         this.adultPricing = aP;
         this.childPricing = cP;
-        this.availableSeats = new ArrayList<String>();
+        this.availableNo = aN;
     }
 
     // Reads the text file and stores them into attributes
     public void inputData(Scanner reader) {
         flightNo = reader.next();
         seatClassType = reader.next();
-        availableNo = reader.nextInt();
         adultPricing = reader.nextDouble();
         childPricing = reader.nextDouble();
-        while (reader.hasNext()) {
+        while (! reader.hasNextInt()) {
             availableSeats.add(reader.next());
         }
+        availableNo = reader.nextInt();
     }
 
     // Writes objects to a text file
@@ -76,6 +75,11 @@ public class Seating {
 
     // String output of object
     public String toString() {
-        return String.format("%s",flightNo);
+        return String.format("\nFlightNo: %s\n" 
+        + "Seat Class Type: %s\n"
+        + "Available Number of Seats: %d\n"
+        + "Adult Price: %.2f\n"
+        + "Child Price: %.2f\n"
+        + "Available Seats: %s", flightNo, seatClassType, availableNo, adultPricing, childPricing, availableSeats);
     }
 }
