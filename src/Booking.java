@@ -102,5 +102,19 @@ public class Booking implements MyFileIO {
     }
 
     //Setter method for whether customer purchased Wi-Fi perks
+    public void setInFlightWiFi(boolean WiFi) {
+        inFlightWiFi = WiFi;
+    }
+
+    //Setter method for food and drinks
+    public void setInFlightFoodAndDrinks(boolean FoodAndDrinks) {
+        inFlightFoodAndDrinks = FoodAndDrinks;
+    }
+
+    //temporary skeleton for set price (Perhaps dynamic pricing is a job for the main method?) -N
+    public void setPrice(double updatedPrice) {
+        price = updatedPrice;
+    }
+    
 
 }
