@@ -23,7 +23,7 @@ public class CustomerManagementSystem {
             File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name so I have added the /src just to make sure it works
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
-            
+
             // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
             while (reader.hasNext()) {
                 Customer customerObj = new Customer();
@@ -31,8 +31,8 @@ public class CustomerManagementSystem {
                 customers.add(customerObj);
             }
             reader.close();
-        } 
-        
+        }
+
         // Catches error if "customers.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -47,7 +47,7 @@ public class CustomerManagementSystem {
             File filename = new File("src/seatings.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
-            
+
             // For each line in the file, a new "Seating" object is created and has data inputted from the file and added to "seatings"
             while (reader.hasNext()) {
                 Seating seatingObj = new Seating();
@@ -55,14 +55,15 @@ public class CustomerManagementSystem {
                 seatings.add(seatingObj);
             }
             reader.close();
-        } 
-        
+        }
+
         // Catches error if "seatings.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
+
     // Loads the data from bookings.txt and stores the data in the Booking Class
     public void loadBookings() {
 
@@ -117,7 +118,7 @@ public class CustomerManagementSystem {
     public void login(Scanner input) {
         // While-loop (only for backend ver only) that requests the user to enter their details until they're authorised
         boolean authorised = false;
-        while(authorised == false) {
+        while (authorised == false) {
             // User email input
             System.out.print("\nEnter email: ");
             String emailInput = input.next();
@@ -140,15 +141,15 @@ public class CustomerManagementSystem {
                         // Prevents a bug where the system thinks the user inputs something invalid on load
                         input.nextLine();
                         break;
-                    } 
-                    
+                    }
+
                     // Error message if the inputted password doesn't match what is stored
                     else {
                         System.out.println("Invalid Password.");
                         break;
                     }
-                } 
-                
+                }
+
                 // Error message if the inputted email doesn't match any of the stored emails
                 else if (i == (customers.size() - 1)) {
                     System.out.println("Invalid email address.");
@@ -159,33 +160,33 @@ public class CustomerManagementSystem {
 
     public void menu(Scanner input) {
         boolean done = false;
-        while(! done) {
+        while (!done) {
             // Menu message that is presented at the start of each loop
             System.out.println("\nWelcome to the FlyDreamAir Customer Management System.\n");
             System.out.println("Input an option below (0-2):\n");
             System.out.println("\t1. Search and book a flight.");
             System.out.println("\t2. Manage flight bookings.");
             System.out.println("\t0. Exit program.");
-            
+
             // Switch cases are based on the input provided by the user
             String menuInput = input.nextLine();
-            switch(menuInput) {
+            switch (menuInput) {
                 // Option 1 - Search and book a flight
                 case "1":
                     System.out.println("i wish i could search and book a flight out of this group project on jah :fire: :fire:");
                     break;
-                
+
                 // Option 2 - Manage flight bookings
                 case "2":
                     System.out.println("managing these flights will be easier than managing this project ong :fire: :fire:");
                     break;
-                
+
                 // Option 0 - Exit program
                 case "0":
                     System.out.println("The program will proceed to exit");
                     done = true;
                     break;
-                
+
                 // Error message if invalid menu input
                 default:
                     System.out.println("\"" + menuInput + "\" is not a valid input. Try again.");
@@ -193,6 +194,7 @@ public class CustomerManagementSystem {
             }
         }
     }
+
     public void printAllBookings() {
         for (Booking booking : bookings) {
             System.out.println(booking);
@@ -203,7 +205,7 @@ public class CustomerManagementSystem {
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
-        
+
         // Loads customer data
         cms.loadCustomers();
 
@@ -211,7 +213,7 @@ public class CustomerManagementSystem {
 
         // Loads seating data
         cms.loadSeatings();
-        
+
         // Customer user login
         cms.login(input);
 

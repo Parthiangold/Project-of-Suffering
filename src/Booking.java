@@ -13,7 +13,8 @@ public class Booking implements MyFileIO {
     private boolean inFlightFoodAndDrinks;
 
     //Constructors
-    public Booking () {}
+    public Booking() {
+    }
 
     /* FlightNo will be referencing the attribute in the flight class in the future
     the main focus is on getting a baseline complete in the first build of the program
@@ -31,7 +32,8 @@ public class Booking implements MyFileIO {
         this.inFlightWiFi = inFlightWiFi;
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
     }
-    // Had to change how input was handled from a token based system to the .nextline() standard used by other classes
+
+    // Had to change how input was handled from a token-based system to the .nextline() standard used by other classes
     @Override
     public void inputData(Scanner scanner) {
         bookingNo = scanner.nextInt();
@@ -62,7 +64,8 @@ public class Booking implements MyFileIO {
                 inFlightWiFi,
                 inFlightFoodAndDrinks);
     }
-    //Finally was able to fix the toString method
+
+    //Finally, I was able to fix the toString method
     @Override
     public String toString(Formatter formatter) {
         String seats = String.join(";", bookedSeats);
@@ -79,7 +82,8 @@ public class Booking implements MyFileIO {
                 inFlightWiFi,
                 inFlightFoodAndDrinks);
     }
-    // Fixes testing issue where java wouldn't recognise parameterised toString for System.out.println
+
+    // Fixes the testing issue where java wouldn't recognise parameterised toString for System.out.println
     @Override
     public String toString() {
         String seats = String.join(";", bookedSeats);
@@ -97,8 +101,8 @@ public class Booking implements MyFileIO {
                 inFlightFoodAndDrinks);
     }
 
-    //Finally I can start working on getters and setters
-    
+    //Finally, I can start working on getters and setters
+
 
     // Get Booking number method
     public int getBookingNo() {
@@ -115,7 +119,7 @@ public class Booking implements MyFileIO {
         seatClassType = seatType;
     }
 
-    //Setter method for whether customer purchased Wi-Fi perks
+    //Setter method for whether a customer purchased Wi-Fi perks
     public void setInFlightWiFi(boolean WiFi) {
         inFlightWiFi = WiFi;
     }
@@ -129,6 +133,6 @@ public class Booking implements MyFileIO {
     public void setPrice(double updatedPrice) {
         price = updatedPrice;
     }
-    
+
 
 }
