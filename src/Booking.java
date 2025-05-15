@@ -32,6 +32,7 @@ public class Booking implements MyFileIO {
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
     }
     // Parses input from file (frontend loads inputs to file this method unloads to backend)
+    @Override
     public void inputData(Scanner scanner) {
         /* Decided to change how input was handled to a token based system.
         this is to help automate the collection of values for the bookedSeats attribute
@@ -57,17 +58,18 @@ public class Booking implements MyFileIO {
 
     }
 
+    // Output for display and/or debugging
     @Override
-    public String toString(Formatter formatter) {
-        return "BookingNo: " + bookingNo;
-
-
+    public void outputData(Formatter formatter) {
+        formatter.format("%d, %d, % d, %s, %s, %s, %b, %b, %.2f, %s",
+                bookingNo, adultNo, childNo, flightNo, seatClassType,
+                String.join(",", bookedSeats), inFlightWiFi,
+                inFlightFoodAndDrinks, price, purchaseDate);
     }
 
-    // Output for display and/or debugging
-    public void outputData(Formatter formatter) {
-        formatter.format("Booking #: %d\n adults: %d\n children: %d \n price: %.2f \n date: %s%n", bookingNo, adultNo, childNo, price, purchaseDate);
-        formatter.format("Flight: %s\n Booked Seats: %s\n Seat Class: %s\n WiFi: %b\n Food and Drinks: %b%n", flightNo, bookedSeats,seatClassType, inFlightWiFi, inFlightFoodAndDrinks);
+    @Override
+    public String toString(Formatter formatter) {
+        return "blah";
     }
     
 
