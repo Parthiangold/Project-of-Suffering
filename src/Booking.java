@@ -50,7 +50,7 @@ public class Booking implements MyFileIO {
         childNo = Integer.parseInt(tokens[2]);
         flightNo = tokens[3];
         seatClassType = tokens[4];
-        bookedSeats = tokens[5].split(",");
+        bookedSeats = tokens[5].split(";");
         inFlightWiFi = Boolean.parseBoolean(tokens[6]);
         inFlightFoodAndDrinks = Boolean.parseBoolean(tokens[7]);
         price = Double.parseDouble(tokens[8]);
@@ -63,14 +63,27 @@ public class Booking implements MyFileIO {
     public void outputData(Formatter formatter) {
         formatter.format("%d, %d, % d, %s, %s, %s, %b, %b, %.2f, %s",
                 bookingNo, adultNo, childNo, flightNo, seatClassType,
-                String.join(",", bookedSeats), inFlightWiFi,
+                String.join(";", bookedSeats), inFlightWiFi,
                 inFlightFoodAndDrinks, price, purchaseDate);
     }
-
+    //Finally was able to fix the toString method
     @Override
     public String toString(Formatter formatter) {
-        return "blah";
+        String seats = String.join(",", bookedSeats);
+        return String.format(
+                "Booking No: %d\nFlight No: %s\nBooked Seats: %s\nAdults: %d\nChildren: %d\nPrice: %.2f\nPurchase Date: %s\nSeat Class: %s\n In Flight WiFi: %b\nIn Flight Food and Drinks: %b\n",
+                bookingNo,
+                flightNo,
+                seats,
+                adultNo,
+                childNo,
+                price,
+                purchaseDate,
+                seatClassType,
+                inFlightWiFi,
+                inFlightFoodAndDrinks);
     }
+    //Finally I can start working on getters and setters
     
 
     // Get Booking number method
