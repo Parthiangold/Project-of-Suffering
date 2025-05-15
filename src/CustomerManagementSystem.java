@@ -7,9 +7,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class CustomerManagementSystem {
     private ArrayList<Customer> customers;
+    private ArrayList<Seating> seatings;
 
     public CustomerManagementSystem() {
         customers = new ArrayList<Customer>();
+        seatings = new ArrayList<Seating>();
     }
 
     // Loads the data from "customers.txt" and stores the data under the "Customer" class
@@ -20,7 +22,7 @@ public class CustomerManagementSystem {
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             
-            // For each line in the file, a new "Purchase" object is created and has data inputted from the file and added to "purchases"
+            // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
             while (reader.hasNext()) {
                 Customer customerObj = new Customer();
                 customerObj.inputData(reader);
@@ -30,6 +32,30 @@ public class CustomerManagementSystem {
         } 
         
         // Catches error if "customers.txt" isn't found
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    // Loads the data from "seatings.txt" and stores the data under the "Seating" class
+    public void loadSeatings() {
+        try {
+            // Reads "seatings.txt"
+            File filename = new File("seatings.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+            
+            // For each line in the file, a new "Seating" object is created and has data inputted from the file and added to "seatings"
+            while (reader.hasNext()) {
+                Seating seatingObj = new Seating();
+                seatingObj.inputData(reader);
+                seatings.add(seatingObj);
+            }
+            reader.close();
+        } 
+        
+        // Catches error if "seatings.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -85,6 +111,8 @@ public class CustomerManagementSystem {
                         // If it matches, the user is authorised, while-loop breaks which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
+                        // Prevents a bug where the system thinks the user inputs something invalid on load
+                        input.nextLine();
                         break;
                     } 
                     
@@ -148,6 +176,9 @@ public class CustomerManagementSystem {
         cms.loadCustomers();
 
         /*cms.loadFlights(); */
+
+        // Loads seating data
+        cms.loadSeatings();
         
         // Customer user login
         cms.login(input);
