@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Booking {
+public class Booking implements MyFileIO {
     private int adultNo;
     private int childNo;
     private double price;
@@ -30,18 +30,24 @@ public class Booking {
     }
     // Parses input from file (frontend loads inputs to file this method unloads to backend)
     public void inputData(Scanner scanner) {
-        // This was done in no particular order as it originally was edited from a previous iteration
-        bookingNo = scanner.nextInt();
-        adultNo = scanner.nextInt();
-        childNo = scanner.nextInt();
-        price = scanner.nextDouble();
-        purchaseDate = scanner.nextLine();
-        bookingNo = scanner.nextInt();
-        seatClassType = scanner.next();
-        inFlightWiFi = scanner.nextBoolean();
-        inFlightFoodAndDrinks = scanner.nextBoolean();
-        bookedSeats = scanner.nextLine().split(" ");
-        flightNo = scanner.nextLine();
+        /* Decided to change how input was handled to a token based system.
+        this is to help automate the collection of values for the bookedSeats attribute
+         */
+        if (!scanner.hasNextLine()) return;
+        String line = scanner.nextLine();
+        String[] tokens = line.split(",");
+
+        parseTokens(tokens);
+    }
+    // Adding new parseTokens method to Bookings
+    private void parseTokens(String[] tokens) {
+        bookingNo = Integer.parseInt(tokens[0]);
+    }
+
+    @Override
+    public String toString(Formatter formatter) {
+        return "BookingNo: " + bookingNo;
+
     }
 
     // Output for display and/or debugging

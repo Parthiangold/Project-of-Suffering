@@ -42,6 +42,10 @@ public class Flight {
         return departureDate;
     }
 
+    public String getArrivalDate() {
+        return flightNo;
+    }
+
     public String toString(Formatter formatter){
         return String.valueOf(formatter.format(String.valueOf(this)));
     }
