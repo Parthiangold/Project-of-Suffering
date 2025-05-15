@@ -50,10 +50,17 @@ public class Booking implements MyFileIO {
     // Output for display and/or debugging
     @Override
     public void outputData(Formatter formatter) {
-        formatter.format("%d, %d, % d, %s, %s, %s, %b, %b, %.2f, %s",
-                bookingNo, adultNo, childNo, flightNo, seatClassType,
-                String.join(";", bookedSeats), inFlightWiFi,
-                inFlightFoodAndDrinks, price, purchaseDate);
+        formatter.format("%d,%s,%s,%d,%d,%.2f,%s,%s,%b,%b\n",
+                bookingNo,
+                flightNo,
+                String.join(";", bookedSeats),
+                adultNo,
+                childNo,
+                price,
+                purchaseDate,
+                seatClassType,
+                inFlightWiFi,
+                inFlightFoodAndDrinks);
     }
     //Finally was able to fix the toString method
     @Override
