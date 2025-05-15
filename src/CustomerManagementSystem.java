@@ -83,7 +83,7 @@ public class CustomerManagementSystem {
 
         //Catches FileNotFound Exception
         catch (FileNotFoundException e) {
-            System.out.println("Error 404 file not found.");
+            System.out.println("Error 404: file 'bookings.txt' not found.");
             e.printStackTrace();
         }
     }
@@ -193,10 +193,16 @@ public class CustomerManagementSystem {
             }
         }
     }
+    public void printAllBookings() {
+        for (Booking booking : bookings) {
+            System.out.println(booking);
+        }
+    }
 
-    public static void main(String[] args) { 
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
+        System.out.println();
         
         // Loads customer data
         cms.loadCustomers();
@@ -209,7 +215,8 @@ public class CustomerManagementSystem {
         // Customer user login
         cms.login(input);
 
-        /*cms.loadBookings(); */
+        cms.loadBookings();
+        cms.printAllBookings();
 
         cms.menu(input);
 

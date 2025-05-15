@@ -34,16 +34,16 @@ public class Booking implements MyFileIO {
     // Had to change how input was handled from a token based system to the .nextline() standard used by other classes
     @Override
     public void inputData(Scanner scanner) {
-        bookingNo = Integer.parseInt(scanner.nextLine());
-        flightNo = scanner.nextLine();
-        String[] bookedSeats = scanner.nextLine().split(";");
-        adultNo = Integer.parseInt(scanner.nextLine());
-        childNo = Integer.parseInt(scanner.nextLine());
-        price = Double.parseDouble(scanner.nextLine());
-        purchaseDate = scanner.nextLine();
-        seatClassType = scanner.nextLine();
-        inFlightWiFi = Boolean.parseBoolean(scanner.nextLine());
-        inFlightFoodAndDrinks = Boolean.parseBoolean(scanner.nextLine());
+        bookingNo = scanner.nextInt();
+        flightNo = scanner.next();
+        bookedSeats = scanner.next().split(";");
+        adultNo = scanner.nextInt();
+        childNo = scanner.nextInt();
+        price = scanner.nextDouble();
+        purchaseDate = scanner.next();
+        seatClassType = scanner.next();
+        inFlightWiFi = scanner.nextBoolean();
+        inFlightFoodAndDrinks = scanner.nextBoolean();
     }
 
 
@@ -65,7 +65,7 @@ public class Booking implements MyFileIO {
     //Finally was able to fix the toString method
     @Override
     public String toString(Formatter formatter) {
-        String seats = String.join(",", bookedSeats);
+        String seats = String.join(";", bookedSeats);
         return String.format(
                 "Booking No: %d\nFlight No: %s\nBooked Seats: %s\nAdults: %d\nChildren: %d\nPrice: %.2f\nPurchase Date: %s\nSeat Class: %s\n In Flight WiFi: %b\nIn Flight Food and Drinks: %b\n",
                 bookingNo,
@@ -79,6 +79,24 @@ public class Booking implements MyFileIO {
                 inFlightWiFi,
                 inFlightFoodAndDrinks);
     }
+    // Fixes testing issue where java wouldn't recognise parameterised toString for System.out.println
+    @Override
+    public String toString() {
+        String seats = String.join(";", bookedSeats);
+        return String.format(
+                "Booking No: %d\nFlight No: %s\nBooked Seats: %s\nAdults: %d\nChildren: %d\nPrice: %.2f\nPurchase Date: %s\nSeat Class: %s\nIn Flight WiFi: %b\nIn Flight Food and Drinks: %b\n",
+                bookingNo,
+                flightNo,
+                seats,
+                adultNo,
+                childNo,
+                price,
+                purchaseDate,
+                seatClassType,
+                inFlightWiFi,
+                inFlightFoodAndDrinks);
+    }
+
     //Finally I can start working on getters and setters
     
 
