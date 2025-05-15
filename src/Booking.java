@@ -15,6 +15,9 @@ public class Booking implements MyFileIO {
     //Constructors
     public Booking () {}
 
+    /* FlightNo will be referencing the attribute in the flight class in the future
+    the main focus is on getting a baseline complete in the first build of the program
+     */
 
     public Booking(int adultNo, int childNo, double price, String purchaseDate, int bookingNo, String seatClassType, String flightNo, String[] bookedSeats, boolean inFlightWiFi, boolean inFlightFoodAndDrinks) {
         this.adultNo = adultNo;
@@ -42,11 +45,22 @@ public class Booking implements MyFileIO {
     // Adding new parseTokens method to Bookings
     private void parseTokens(String[] tokens) {
         bookingNo = Integer.parseInt(tokens[0]);
+        adultNo  = Integer.parseInt(tokens[1]);
+        childNo = Integer.parseInt(tokens[2]);
+        flightNo = tokens[3];
+        seatClassType = tokens[4];
+        bookedSeats = tokens[5].split(",");
+        inFlightWiFi = Boolean.parseBoolean(tokens[6]);
+        inFlightFoodAndDrinks = Boolean.parseBoolean(tokens[7]);
+        price = Double.parseDouble(tokens[8]);
+        purchaseDate = tokens[9];
+
     }
 
     @Override
     public String toString(Formatter formatter) {
         return "BookingNo: " + bookingNo;
+
 
     }
 
