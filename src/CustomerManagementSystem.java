@@ -8,17 +8,19 @@ import java.security.NoSuchAlgorithmException;
 public class CustomerManagementSystem {
     private ArrayList<Customer> customers;
     private ArrayList<Seating> seatings;
+    private ArrayList<Booking> bookings;
 
     public CustomerManagementSystem() {
         customers = new ArrayList<Customer>();
         seatings = new ArrayList<Seating>();
+        bookings = new ArrayList<Booking>();
     }
 
     // Loads the data from "customers.txt" and stores the data under the "Customer" class
     public void loadCustomers() {
         try {
             // Reads "customers.txt"
-            File filename = new File("customers.txt");
+            File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name so I have added the /src just to make sure it works
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             
@@ -42,7 +44,7 @@ public class CustomerManagementSystem {
     public void loadSeatings() {
         try {
             // Reads "seatings.txt"
-            File filename = new File("seatings.txt");
+            File filename = new File("src/seatings.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             
@@ -58,6 +60,30 @@ public class CustomerManagementSystem {
         // Catches error if "seatings.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    // Loads the data from bookings.txt and stores the data in the Booking Class
+    public void loadBookings() {
+
+        try {
+            // Reads the bookings.txt file
+            File filename = new File("src/bookings.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+
+            // For every newline the txt file has a new "Booking" object is made to store the data
+            while (reader.hasNext()) {
+                Booking bookingObj = new Booking();
+                bookingObj.inputData(reader);
+                bookings.add(bookingObj);
+            }
+            reader.close();
+        }
+
+        //Catches FileNotFound Exception
+        catch (FileNotFoundException e) {
+            System.out.println("Error 404 file not found.");
             e.printStackTrace();
         }
     }
