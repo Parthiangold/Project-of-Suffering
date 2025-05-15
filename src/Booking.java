@@ -31,32 +31,21 @@ public class Booking implements MyFileIO {
         this.inFlightWiFi = inFlightWiFi;
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
     }
-    // Parses input from file (frontend loads inputs to file this method unloads to backend)
+    // Had to change how input was handled from a token based system to the .nextline() standard used by other classes
     @Override
     public void inputData(Scanner scanner) {
-        /* Decided to change how input was handled to a token based system.
-        this is to help automate the collection of values for the bookedSeats attribute
-         */
-        if (!scanner.hasNextLine()) return;
-        String line = scanner.nextLine();
-        String[] tokens = line.split(",");
-
-        parseTokens(tokens);
+        bookingNo = Integer.parseInt(scanner.nextLine());
+        flightNo = scanner.nextLine();
+        String[] bookedSeats = scanner.nextLine().split(";");
+        adultNo = Integer.parseInt(scanner.nextLine());
+        childNo = Integer.parseInt(scanner.nextLine());
+        price = Double.parseDouble(scanner.nextLine());
+        purchaseDate = scanner.nextLine();
+        seatClassType = scanner.nextLine();
+        inFlightWiFi = Boolean.parseBoolean(scanner.nextLine());
+        inFlightFoodAndDrinks = Boolean.parseBoolean(scanner.nextLine());
     }
-    // Adding new parseTokens method to Bookings
-    private void parseTokens(String[] tokens) {
-        bookingNo = Integer.parseInt(tokens[0]);
-        adultNo  = Integer.parseInt(tokens[1]);
-        childNo = Integer.parseInt(tokens[2]);
-        flightNo = tokens[3];
-        seatClassType = tokens[4];
-        bookedSeats = tokens[5].split(";");
-        inFlightWiFi = Boolean.parseBoolean(tokens[6]);
-        inFlightFoodAndDrinks = Boolean.parseBoolean(tokens[7]);
-        price = Double.parseDouble(tokens[8]);
-        purchaseDate = tokens[9];
 
-    }
 
     // Output for display and/or debugging
     @Override
