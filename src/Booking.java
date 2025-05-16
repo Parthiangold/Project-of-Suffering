@@ -65,7 +65,7 @@ public class Booking implements MyFileIO {
                 inFlightFoodAndDrinks);
     }
 
-    //Finally, I was able to fix the toString method
+    // toString has been debugged and now is displaying the correct data
     @Override
     public String toString(Formatter formatter) {
         String seats = String.join(";", bookedSeats);

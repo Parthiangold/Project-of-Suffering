@@ -20,7 +20,7 @@ public class CustomerManagementSystem {
     public void loadCustomers() {
         try {
             // Reads "customers.txt"
-            File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name so I have added the /src just to make sure it works
+            File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name, so I have added the /src just to make sure it works
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
@@ -135,10 +135,10 @@ public class CustomerManagementSystem {
                 // If there is a matching email, the inputted password is compared to what is stored under their details
                 if (emailInput.equals(objEmail)) {
                     if (passwordInput.equals(customerObj.getPassword())) {
-                        // If it matches, the user is authorised, while-loop breaks which finishes the method
+                        // If it matches, the user is authorised, while-loop breaks, which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
-                        // Prevents a bug where the system thinks the user inputs something invalid on load
+                        // Prevents a bug where the system thinks the user inputs something invalid on loading
                         input.nextLine();
                         break;
                     }
@@ -195,6 +195,8 @@ public class CustomerManagementSystem {
         }
     }
 
+    // Prints all bookings in the "bookings" ArrayList
+    // This is used for debugging purposes and will be removed in the final build
     public void printAllBookings() {
         for (Booking booking : bookings) {
             System.out.println(booking);
@@ -222,7 +224,7 @@ public class CustomerManagementSystem {
 
         cms.menu(input);
 
-        // User input closes when program is terminating
+        // User input closes when the program is terminating
         input.close();
     }
 }

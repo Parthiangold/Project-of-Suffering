@@ -73,7 +73,7 @@ public class Seating {
         //e
     }
 
-    // String output of object
+    // String output of an object
     public String toString() {
         return String.format("\nFlightNo: %s\n" 
         + "Seat Class Type: %s\n"
