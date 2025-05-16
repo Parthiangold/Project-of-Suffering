@@ -29,6 +29,30 @@ public class Flight {
         this.aircraftType = aircraftType;
     }
 
+
+
+    //1 change that i made
+    // getFlightNo method
+    public void inputData(Scanner reader){
+        flightNo =reader.next();
+        departureDestination = reader.next();
+        arrivalDestination = reader.next();
+        departureDate = reader.next();
+        arrivalDate= reader.next();
+        departureTime = reader.next();
+        arrivalTime = reader.next();
+        stopover = reader.next();
+        totalDuration = reader.next();
+        aircraftType = reader.next();
+
+    }
+
+    //1 change that i made until here
+
+
+
+
+
     // getDepartureDestination method
     public String getDepartureDestination() {
         return departureDestination;
@@ -41,7 +65,7 @@ public class Flight {
     public String getDepartureDate() {
         return departureDate;
     }
-
+    
     public String getArrivalDate() {
         return flightNo;
     }

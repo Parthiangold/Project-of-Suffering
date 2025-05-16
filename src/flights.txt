@@ -1,0 +1,3 @@
+QF101,Sydney,Melbourne,2025-06-01,2025-06-01,08:00,09:30,None,1h30m,Boeing 737
+QF202,Brisbane,Perth,2025-06-02,2025-06-02,10:00,13:30,Adelaide,5h30m,Airbus A330
+QF303,Melbourne,Auckland,2025-06-03,2025-06-03,07:00,12:00,Wellington,5h,Boeing 787
