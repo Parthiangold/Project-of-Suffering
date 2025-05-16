@@ -7,11 +7,14 @@ import java.security.NoSuchAlgorithmException;
 
 public class CustomerManagementSystem {
     private ArrayList<Customer> customers;
+    private ArrayList<Flight> flights;
     private ArrayList<Seating> seatings;
     private ArrayList<Booking> bookings;
 
+
     public CustomerManagementSystem() {
         customers = new ArrayList<Customer>();
+        flights= new ArrayList<Flight>();
         seatings = new ArrayList<Seating>();
         bookings = new ArrayList<Booking>();
     }
@@ -23,23 +26,22 @@ public class CustomerManagementSystem {
             File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name, so I have added the /src just to make sure it works
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
-
-            // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
+            
+             // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
             while (reader.hasNext()) {
                 Customer customerObj = new Customer();
                 customerObj.inputData(reader);
                 customers.add(customerObj);
             }
             reader.close();
-        }
-
+        } 
+        
         // Catches error if "customers.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-
     // Loads the data from "seatings.txt" and stores the data under the "Seating" class
     public void loadSeatings() {
         try {
@@ -89,6 +91,39 @@ public class CustomerManagementSystem {
         }
     }
 
+
+
+
+
+
+
+    //2 second change that i made
+    public void loadFlights(){
+        try{
+            File filename = new File("flight.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+            while(reader.hasNext()){
+                Flight flightObj= new Flight();
+                flightObj.inputData(reader);
+                flights.add(flightObj);
+            }
+            reader.close();
+
+        }
+
+        catch (FileNotFoundException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+    //second change that i made until here
+
+
+    
+
+    
     // Converts user input into SHA-512 to check their customer password input in +login() method
     public String passwordHashing(String passwordInput) {
         try {
@@ -118,7 +153,7 @@ public class CustomerManagementSystem {
     public void login(Scanner input) {
         // While-loop (only for backend ver only) that requests the user to enter their details until they're authorised
         boolean authorised = false;
-        while (authorised == false) {
+        while(authorised == false) {
             // User email input
             System.out.print("\nEnter email: ");
             String emailInput = input.next();
@@ -135,21 +170,20 @@ public class CustomerManagementSystem {
                 // If there is a matching email, the inputted password is compared to what is stored under their details
                 if (emailInput.equals(objEmail)) {
                     if (passwordInput.equals(customerObj.getPassword())) {
-                        // If it matches, the user is authorised, while-loop breaks, which finishes the method
+                        // If it matches, the user is authorised, while-loop breaks which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
-                        // Prevents a bug where the system thinks the user inputs something invalid on loading
                         input.nextLine();
                         break;
-                    }
-
+                    } 
+                    
                     // Error message if the inputted password doesn't match what is stored
                     else {
                         System.out.println("Invalid Password.");
                         break;
                     }
-                }
-
+                } 
+                
                 // Error message if the inputted email doesn't match any of the stored emails
                 else if (i == (customers.size() - 1)) {
                     System.out.println("Invalid email address.");
@@ -157,7 +191,6 @@ public class CustomerManagementSystem {
             }
         }
     }
-
     public void menu(Scanner input) {
         boolean done = false;
         while (!done) {
@@ -203,28 +236,41 @@ public class CustomerManagementSystem {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
+        
+
+        public void printAllFlights() {
+            for (Flight flight : flights) {
+                System.out.println(flight);
+            }
+        }
+        
+        cms.printAllFlights();
+
 
         // Loads customer data
         cms.loadCustomers();
 
-        /*cms.loadFlights(); */
-
+        cms.loadFlights();
         // Loads seating data
         cms.loadSeatings();
-
+        
+        
         // Customer user login
         cms.login(input);
 
-        cms.loadBookings();
+        cms.loadBookings(); 
         cms.printAllBookings();
 
         cms.menu(input);
 
-        // User input closes when the program is terminating
+
+        /*cms.menu(); */
+
+        // User input closes when program is terminating
         input.close();
     }
 }
