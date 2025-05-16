@@ -70,7 +70,21 @@ public class Flight {
         return flightNo;
     }
 
-    public String toString(Formatter formatter){
-        return String.valueOf(formatter.format(String.valueOf(this)));
-    }
+   
+    @Override
+    public String toString(){
+        return String.format(
+                "Flight no: %s\nDeparture Destination: %s\nArrival destination: %s\nDeparture date: %s\nArrival Date: %s\nDeparture time: %s\nArrival: %s\nStopover: %s\nTotal duration: %s\n Aircaft Type: %s\n",
+                flightNo,
+                departureDestination,
+                arrivalDestination,
+                departureDate,
+                arrivalDate,
+                departureTime,
+                arrivalTime,
+                stopover,
+                totalDuration,
+                aircraftType);
+            }
+    
 }

@@ -100,7 +100,7 @@ public class CustomerManagementSystem {
     //2 second change that i made
     public void loadFlights(){
         try{
-            File filename = new File("flight.txt");
+            File filename = new File("src/flights.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             while(reader.hasNext()){
@@ -236,25 +236,28 @@ public class CustomerManagementSystem {
         }
     }
 
+
+    public void printAllFlights(){
+        for (Flight flight : flights) {
+            System.out.println(flight);
+        }
+    }
+
     public static void main(String[] args) { 
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
         
 
-        public void printAllFlights() {
-            for (Flight flight : flights) {
-                System.out.println(flight);
-            }
-        }
         
+        cms.loadFlights();
         cms.printAllFlights();
 
 
         // Loads customer data
         cms.loadCustomers();
 
-        cms.loadFlights();
+       
         // Loads seating data
         cms.loadSeatings();
         
