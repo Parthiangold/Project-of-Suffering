@@ -20,14 +20,14 @@ public class Booking implements MyFileIO {
     the main focus is on getting a baseline complete in the first build of the program
      */
 
-    public Booking(int adultNo, int childNo, double price, String purchaseDate, int bookingNo, String seatClassType, String flightNo, String[] bookedSeats, boolean inFlightWiFi, boolean inFlightFoodAndDrinks) {
+    public Booking(int bookingNo, String flightNo, String[] bookedSeats, int adultNo, int childNo, double price, String purchaseDate, String seatClassType, boolean inFlightWiFi, boolean inFlightFoodAndDrinks) {
+        this.bookingNo = bookingNo;
+        this.flightNo = flightNo;
+        this.bookedSeats = bookedSeats;
         this.adultNo = adultNo;
         this.childNo = childNo;
         this.price = price;
         this.purchaseDate = purchaseDate;
-        this.bookingNo = bookingNo;
-        this.flightNo = flightNo;
-        this.bookedSeats = bookedSeats;
         this.seatClassType = seatClassType;
         this.inFlightWiFi = inFlightWiFi;
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;
@@ -67,24 +67,6 @@ public class Booking implements MyFileIO {
 
     // toString has been debugged and now is displaying the correct data
     @Override
-    public String toString(Formatter formatter) {
-        String seats = String.join(";", bookedSeats);
-        return String.format(
-                "Booking No: %d\nFlight No: %s\nBooked Seats: %s\nAdults: %d\nChildren: %d\nPrice: %.2f\nPurchase Date: %s\nSeat Class: %s\n In Flight WiFi: %b\nIn Flight Food and Drinks: %b\n",
-                bookingNo,
-                flightNo,
-                seats,
-                adultNo,
-                childNo,
-                price,
-                purchaseDate,
-                seatClassType,
-                inFlightWiFi,
-                inFlightFoodAndDrinks);
-    }
-
-    // Fixes the testing issue where java wouldn't recognise parameterised toString for System.out.println
-    @Override
     public String toString() {
         String seats = String.join(";", bookedSeats);
         return String.format(
@@ -100,9 +82,6 @@ public class Booking implements MyFileIO {
                 inFlightWiFi,
                 inFlightFoodAndDrinks);
     }
-
-    //Finally, I can start working on getters and setters
-
 
     // Get Booking number method
     public int getBookingNo() {

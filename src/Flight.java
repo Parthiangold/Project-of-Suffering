@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Flight {
+public class Flight implements MyFileIO {
     private String flightNo;
     private String departureDestination;
     private String arrivalDestination;
@@ -29,12 +29,10 @@ public class Flight {
         this.aircraftType = aircraftType;
     }
 
-
-
     //1 change that i made
     // getFlightNo method
     public void inputData(Scanner reader){
-        flightNo =reader.next();
+        flightNo = reader.next();
         departureDestination = reader.next();
         arrivalDestination = reader.next();
         departureDate = reader.next();
@@ -47,44 +45,56 @@ public class Flight {
 
     }
 
-    //1 change that i made until here
-
-
-
-
+    // Writes objects to a text file
+    public void outputData(Formatter formatter) {
+        formatter.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", 
+        flightNo, 
+        departureDestination, 
+        arrivalDestination, 
+        departureDate, 
+        arrivalDate, 
+        departureTime, 
+        arrivalTime, 
+        stopover, 
+        totalDuration, 
+        aircraftType);
+    }
 
     // getDepartureDestination method
     public String getDepartureDestination() {
-        return departureDestination;
+        return this.departureDestination;
     }
 
     public String getArrivalDestination() {
-        return arrivalDestination;
+        return this.arrivalDestination;
     }
 
     public String getDepartureDate() {
-        return departureDate;
+        return this.departureDate;
     }
     
     public String getArrivalDate() {
-        return flightNo;
+        return this.arrivalDate;
     }
 
-   
+    public String getFlightNo() {
+        return this.flightNo;
+    }
+
     @Override
     public String toString(){
         return String.format(
-                "Flight no: %s\nDeparture Destination: %s\nArrival destination: %s\nDeparture date: %s\nArrival Date: %s\nDeparture time: %s\nArrival: %s\nStopover: %s\nTotal duration: %s\n Aircaft Type: %s\n",
-                flightNo,
-                departureDestination,
-                arrivalDestination,
-                departureDate,
-                arrivalDate,
-                departureTime,
-                arrivalTime,
-                stopover,
-                totalDuration,
-                aircraftType);
+            "Flight no: %s\nDeparture Destination: %s\nArrival destination: %s\nDeparture date: %s\nArrival Date: %s\nDeparture time: %s\nArrival: %s\nStopover: %s\nTotal duration: %s\nAircaft Type: %s\n",
+            flightNo,
+            departureDestination,
+            arrivalDestination,
+            departureDate,
+            arrivalDate,
+            departureTime,
+            arrivalTime,
+            stopover,
+            totalDuration,
+            aircraftType);
             }
     
 }

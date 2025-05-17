@@ -11,10 +11,10 @@ public class CustomerManagementSystem {
     private ArrayList<Seating> seatings;
     private ArrayList<Booking> bookings;
 
-
+    // Initialises ArrayLists
     public CustomerManagementSystem() {
         customers = new ArrayList<Customer>();
-        flights= new ArrayList<Flight>();
+        flights = new ArrayList<Flight>();
         seatings = new ArrayList<Seating>();
         bookings = new ArrayList<Booking>();
     }
@@ -23,7 +23,7 @@ public class CustomerManagementSystem {
     public void loadCustomers() {
         try {
             // Reads "customers.txt"
-            File filename = new File("src/customers.txt"); //Had issues in prior projects where files wouldn't load with just the file name, so I have added the /src just to make sure it works
+            File filename = new File("customers.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             
@@ -42,11 +42,12 @@ public class CustomerManagementSystem {
             e.printStackTrace();
         }
     }
+
     // Loads the data from "seatings.txt" and stores the data under the "Seating" class
     public void loadSeatings() {
         try {
             // Reads "seatings.txt"
-            File filename = new File("src/seatings.txt");
+            File filename = new File("seatings.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
@@ -66,16 +67,17 @@ public class CustomerManagementSystem {
         }
     }
 
-    // Loads the data from bookings.txt and stores the data in the Booking Class
-    public void loadBookings() {
+    // Loads the data from bookings_<CustomerNo>.txt and stores the data in the Booking Class
+    public void loadBookings(int customerNo) {
 
         try {
-            // Reads the bookings.txt file
-            File filename = new File("src/bookings.txt");
+            // Reads the bookings txt file based on the authorised customer's number
+            String customerFile = "bookings_" + Integer.toString(customerNo) + ".txt";
+            File filename = new File(customerFile);
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
-            // For every newline the txt file has a new "Booking" object is made to store the data
+            // For every newline in the txt file, a new "Booking" object is made to store the data
             while (reader.hasNext()) {
                 Booking bookingObj = new Booking();
                 bookingObj.inputData(reader);
@@ -84,23 +86,17 @@ public class CustomerManagementSystem {
             reader.close();
         }
 
-        //Catches FileNotFound Exception
+        // Catches error if "bookings_<customerNo>.txt" isn't found
         catch (FileNotFoundException e) {
             System.out.println("Error 404: file 'bookings.txt' not found.");
             e.printStackTrace();
         }
     }
 
-
-
-
-
-
-
-    //2 second change that i made
+    // Loads the data from flights.txt and stores the data in the Flight Class
     public void loadFlights(){
         try{
-            File filename = new File("src/flights.txt");
+            File filename = new File("flights.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             while(reader.hasNext()){
@@ -112,17 +108,13 @@ public class CustomerManagementSystem {
 
         }
 
+        // Catches error if "flights.txt" isn't found
         catch (FileNotFoundException e){
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
     }
-    //second change that i made until here
-
-
-    
-
     
     // Converts user input into SHA-512 to check their customer password input in +login() method
     public String passwordHashing(String passwordInput) {
@@ -150,10 +142,11 @@ public class CustomerManagementSystem {
     }
 
     // Authorises customer login details before proceeding with booking management and searches
-    public void login(Scanner input) {
+    public Customer login(Scanner input) {
         // While-loop (only for backend ver only) that requests the user to enter their details until they're authorised
         boolean authorised = false;
-        while(authorised == false) {
+        Customer customerObj = null;
+        while (authorised == false) {
             // User email input
             System.out.print("\nEnter email: ");
             String emailInput = input.next();
@@ -164,7 +157,7 @@ public class CustomerManagementSystem {
 
             // For-loop first checks to see if there's a matching email
             for (int i = 0; i < customers.size(); i++) {
-                Customer customerObj = customers.get(i);
+                customerObj = customers.get(i);
                 String objEmail = customerObj.getEmail();
 
                 // If there is a matching email, the inputted password is compared to what is stored under their details
@@ -173,6 +166,8 @@ public class CustomerManagementSystem {
                         // If it matches, the user is authorised, while-loop breaks which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
+
+                        // Fixes a bug where the +menu() method takes an empty invalid input on load following this method's end
                         input.nextLine();
                         break;
                     } 
@@ -190,8 +185,10 @@ public class CustomerManagementSystem {
                 }
             }
         }
+        return customerObj;
     }
-    public void menu(Scanner input) {
+
+    public void menu(Scanner input, Customer customerObj) {
         boolean done = false;
         while (!done) {
             // Menu message that is presented at the start of each loop
@@ -199,8 +196,8 @@ public class CustomerManagementSystem {
             System.out.println("Input an option below (0-2):\n");
             System.out.println("\t1. Search and book a flight.");
             System.out.println("\t2. Manage flight bookings.");
-            System.out.println("\t0. Exit program.");
-
+            System.out.println("\t0. Exit program.\n");
+            
             // Switch cases are based on the input provided by the user
             String menuInput = input.nextLine();
             switch (menuInput) {
@@ -216,6 +213,35 @@ public class CustomerManagementSystem {
 
                 // Option 0 - Exit program
                 case "0":
+                    try {
+                        // Formats all flights into "flights.txt"
+                        Formatter formatter = new Formatter("flights.txt");
+                        for (Flight f:flights) {
+                            f.outputData(formatter);
+                        }
+                        formatter.close();
+        
+                        // Formats all seatings into "seatings.txt"
+                        formatter = new Formatter("seatings.txt");
+                        for (Seating s:seatings) {
+                            s.outputData(formatter);
+                        }
+                        formatter.close();
+        
+                        // Formats all bookings into "bookings_<CustomerNo>.txt"
+                        String customerBookingFilename = "bookings_" + customerObj.getCustomerNo();
+                        formatter = new Formatter(customerBookingFilename + ".txt");
+                        for (Booking b:bookings) {
+                            b.outputData(formatter);
+                        }
+                        formatter.close();
+                        System.out.println("\nData has successfully been saved.");
+                    }
+                    // Catches error if any of the files don't exist
+                    catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
                     System.out.println("The program will proceed to exit");
                     done = true;
                     break;
@@ -236,42 +262,51 @@ public class CustomerManagementSystem {
         }
     }
 
-
+    // Debugging method for printing all Flight objects
     public void printAllFlights(){
         for (Flight flight : flights) {
             System.out.println(flight);
         }
     }
 
+    // Debugging method for printing all Seating objects
+    public void printAllSeatings() {
+        for (Seating s : seatings) {
+            System.out.println(s);
+        }
+    }
+
+    // Debugging method used to test if file exports can save data made within the program
+    public void testData() {
+        String[] bookingData = {"12B","12C"};
+        Booking bookingObj = new Booking(4,"FDA124",bookingData,2,0,1400.00,"2025-05-12","Economy",false,false);
+        bookings.add(bookingObj);
+        Flight flightObj = new Flight("FDA800","Sydney","Tokyo","2025-05-12","2025-05-12","07:00 GMT+10","16:00 GMT+9","None","10h","Boeing 787");
+        flights.add(flightObj);
+        String[] seatingData = {"24D","34D","48D"};
+        Seating seatingObj = new Seating("FDA800","Economy",320.00,160.00,seatingData,3);
+        seatings.add(seatingObj);
+    }
+    
     public static void main(String[] args) { 
+        // Initialises user input scanner and CMS object
         Scanner input = new Scanner(System.in);
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
         
-
-        
+        // Loads flight, customer and seating data
         cms.loadFlights();
-        cms.printAllFlights();
-
-
-        // Loads customer data
         cms.loadCustomers();
-
-       
-        // Loads seating data
         cms.loadSeatings();
-        
-        
-        // Customer user login
-        cms.login(input);
 
-        cms.loadBookings(); 
-        cms.printAllBookings();
+        // Customer user login, which also returns the object of the authorised customer to be used in the menu method
+        Customer customerObj = cms.login(input);
 
-        cms.menu(input);
+        // Loads booking data based on the authorised customer's customerNo
+        cms.loadBookings(customerObj.getCustomerNo()); 
 
-
-        /*cms.menu(); */
+        // Initialises the menu, which takes in the customerObj to use for exiting the program (case "0")
+        cms.menu(input, customerObj);
 
         // User input closes when program is terminating
         input.close();
