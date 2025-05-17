@@ -188,6 +188,7 @@ public class CustomerManagementSystem {
         return customerObj;
     }
 
+    // Menu loop implementation
     public void menu(Scanner input, Customer customerObj) {
         boolean done = false;
         while (!done) {
@@ -287,7 +288,7 @@ public class CustomerManagementSystem {
         Seating seatingObj = new Seating("FDA800","Economy",320.00,160.00,seatingData,3);
         seatings.add(seatingObj);
     }
-    
+
     public static void main(String[] args) { 
         // Initialises user input scanner and CMS object
         Scanner input = new Scanner(System.in);
