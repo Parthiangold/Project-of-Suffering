@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Seating {
+public class Seating implements MyFileIO {
     private String flightNo, seatClassType;
     private double adultPricing, childPricing;
     private ArrayList<String> availableSeats = new ArrayList<String>();
@@ -8,11 +8,15 @@ public class Seating {
 
     // Default constructors initialise class and attributes
     public Seating() {}
-    public Seating(String fN, String sCT, double aP, double cP, int aN) {
+    public Seating(String fN, String sCT, double aP, double cP, String[] aS, int aN) {
         this.flightNo = fN;
         this.seatClassType = sCT;
         this.adultPricing = aP;
         this.childPricing = cP;
+        availableSeats = new ArrayList<String>();
+        for (int i = 0; i < aS.length; i++) {
+            availableSeats.add(aS[i]);
+        }
         this.availableNo = aN;
     }
 
@@ -30,7 +34,11 @@ public class Seating {
 
     // Writes objects to a text file
     public void outputData(Formatter formatter) {
-        //e
+        String seatString = "";
+        for (int i = 0; i < availableSeats.size(); i++) {
+            seatString += availableSeats.get(i) + ",";
+        }
+        formatter.format("%s,%s,%.2f,%.2f,%s%d\n", flightNo, seatClassType, adultPricing, childPricing, seatString, availableNo);
     }
 
     // Sets the number of available seats
@@ -77,9 +85,9 @@ public class Seating {
     public String toString() {
         return String.format("\nFlightNo: %s\n" 
         + "Seat Class Type: %s\n"
-        + "Available Number of Seats: %d\n"
         + "Adult Price: %.2f\n"
         + "Child Price: %.2f\n"
-        + "Available Seats: %s", flightNo, seatClassType, availableNo, adultPricing, childPricing, availableSeats);
+        + "Available Number of Seats: %d\n"
+        + "Available Seats: %s", flightNo, seatClassType, adultPricing, childPricing, availableNo, availableSeats);
     }
 }

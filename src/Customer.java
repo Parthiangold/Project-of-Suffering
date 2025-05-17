@@ -2,15 +2,14 @@ import java.util.*;
 
 public class Customer {
     private int customerNo;
-    private String name, email, address, password;
+    private String name, email, password;
 
     // Default constructors initialise class and attributes
     public Customer() {}
-    public Customer(int c, String n, String e, String a, String p) {
+    public Customer(int c, String n, String e, String p) {
         this.customerNo = c;
         this.name = n;
         this.email = e;
-        this.address = a;
         this.password = p;
     }
 
@@ -19,7 +18,6 @@ public class Customer {
         customerNo = reader.nextInt();
         name = reader.next();
         email = reader.next();
-        address = reader.next();
         password = reader.next();
     }
 
@@ -36,5 +34,10 @@ public class Customer {
     // Returns the "customerNo" of the object
     public int getCustomerNo() {
         return this.customerNo;
+    }
+
+    // Returns the name of the customer
+    public String getName() {
+        return this.name;
     }
 }
