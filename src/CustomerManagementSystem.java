@@ -38,7 +38,7 @@ public class CustomerManagementSystem {
         
         // Catches error if "customers.txt" isn't found
         catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'customers.txt' not found.");
             e.printStackTrace();
         }
     }
@@ -62,7 +62,7 @@ public class CustomerManagementSystem {
 
         // Catches error if "seatings.txt" isn't found
         catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'seatings.txt' not found.");
             e.printStackTrace();
         }
     }
@@ -110,7 +110,7 @@ public class CustomerManagementSystem {
 
         // Catches error if "flights.txt" isn't found
         catch (FileNotFoundException e){
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'flights.txt' not found.");
             e.printStackTrace();
         }
 
@@ -163,11 +163,11 @@ public class CustomerManagementSystem {
                 // If there is a matching email, the inputted password is compared to what is stored under their details
                 if (emailInput.equals(objEmail)) {
                     if (passwordInput.equals(customerObj.getPassword())) {
-                        // If it matches, the user is authorised, while-loop breaks which finishes the method
+                        // If it matches, the user is authorised, while-loop breaks, which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
 
-                        // Fixes a bug where the +menu() method takes an empty invalid input on load following this method's end
+                        // Fixes a bug where the +menu() method takes an empty invalid input on program loading following this method's end
                         input.nextLine();
                         break;
                     } 
@@ -240,7 +240,7 @@ public class CustomerManagementSystem {
                     }
                     // Catches error if any of the files don't exist
                     catch (FileNotFoundException e) {
-                        System.out.println("An error occurred.");
+                        System.out.println("Error 404: file 'flights.txt', 'seatings.txt' or 'bookings_<CustomerNo>.txt' not found.");
                         e.printStackTrace();
                     }
                     System.out.println("The program will proceed to exit");
@@ -295,7 +295,7 @@ public class CustomerManagementSystem {
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
         
-        // Loads flight, customer and seating data
+        // Loads the flight, customer and seating data
         cms.loadFlights();
         cms.loadCustomers();
         cms.loadSeatings();
@@ -309,7 +309,7 @@ public class CustomerManagementSystem {
         // Initialises the menu, which takes in the customerObj to use for exiting the program (case "0")
         cms.menu(input, customerObj);
 
-        // User input closes when program is terminating
+        // User input closes when the program is terminating
         input.close();
     }
 }
