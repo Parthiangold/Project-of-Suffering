@@ -188,7 +188,72 @@ public class CustomerManagementSystem {
         return customerObj;
     }
 
-    // Menu loop implementation
+    //Adding new find and select bookings by ID logic
+    public Booking findBooking(int bookingNo) {
+        for (Booking b : bookings) {
+            if (b.getBookingNo() == bookingNo) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    /*Adding the new modified booking logic
+    Implementing the updateSeatClass method using a boolean signature as a way to check if the operation is successful
+     */
+    public boolean updateSeatClass(int bookingNo, String newSeatClass) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setSeatClassType(newSeatClass);
+            return true;
+        }
+        return false;
+    }
+
+    //Implementation of the updateSeats class
+    public boolean updateSeats(int bookingNo, String[] newSeats) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setBookedSeats(newSeats);
+            return true;
+        }
+        return false;
+    }
+
+    //Implementation of the updateWiFiOption method (This method will be used in backend logic)
+    public boolean updateWiFiOption(int bookingNo, boolean newWiFiOption) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setInFlightWiFi(newWiFiOption);
+            return true;
+        }
+        return false;
+    }
+
+    // Implementation of the updateFoodOption method (This method will be used in backend logic)
+    public boolean updateFoodOption(int bookingNo, boolean newFoodOption) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setInFlightFoodAndDrinks(newFoodOption);
+            return true;
+        }
+        return false;
+    }
+
+    /* Adding the option to delete and cancel bookings in the backend of the system
+    Implemented using a boolean signature as a way to check if the operation is successful
+     */
+    public boolean cancelBooking(int bookingNo) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            bookings.remove(b);
+            return true;
+        }
+        return false;
+    }
+
+
+    // Temporary testing Menu loop implementation
     public void menu(Scanner input, Customer customerObj) {
         boolean done = false;
         while (!done) {
