@@ -38,7 +38,7 @@ public class CustomerManagementSystem {
         
         // Catches error if "customers.txt" isn't found
         catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'customers.txt' not found.");
             e.printStackTrace();
         }
     }
@@ -62,7 +62,7 @@ public class CustomerManagementSystem {
 
         // Catches error if "seatings.txt" isn't found
         catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'seatings.txt' not found.");
             e.printStackTrace();
         }
     }
@@ -110,7 +110,7 @@ public class CustomerManagementSystem {
 
         // Catches error if "flights.txt" isn't found
         catch (FileNotFoundException e){
-            System.out.println("An error occurred.");
+            System.out.println("Error 404: file 'flights.txt' not found.");
             e.printStackTrace();
         }
 
@@ -163,11 +163,11 @@ public class CustomerManagementSystem {
                 // If there is a matching email, the inputted password is compared to what is stored under their details
                 if (emailInput.equals(objEmail)) {
                     if (passwordInput.equals(customerObj.getPassword())) {
-                        // If it matches, the user is authorised, while-loop breaks which finishes the method
+                        // If it matches, the user is authorised, while-loop breaks, which finishes the method
                         System.out.println("Customer authorised.");
                         authorised = true;
 
-                        // Fixes a bug where the +menu() method takes an empty invalid input on load following this method's end
+                        // Fixes a bug where the +menu() method takes an empty invalid input on program loading following this method's end
                         input.nextLine();
                         break;
                     } 
@@ -188,7 +188,72 @@ public class CustomerManagementSystem {
         return customerObj;
     }
 
-    // Menu loop implementation
+    //Adding new find and select bookings by ID logic
+    public Booking findBooking(int bookingNo) {
+        for (Booking b : bookings) {
+            if (b.getBookingNo() == bookingNo) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    /*Adding the new modified booking logic
+    Implementing the updateSeatClass method using a boolean signature as a way to check if the operation is successful
+     */
+    public boolean updateSeatClass(int bookingNo, String newSeatClass) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setSeatClassType(newSeatClass);
+            return true;
+        }
+        return false;
+    }
+
+    //Implementation of the updateSeats class
+    public boolean updateSeats(int bookingNo, String[] newSeats) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setBookedSeats(newSeats);
+            return true;
+        }
+        return false;
+    }
+
+    //Implementation of the updateWiFiOption method (This method will be used in backend logic)
+    public boolean updateWiFiOption(int bookingNo, boolean newWiFiOption) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setInFlightWiFi(newWiFiOption);
+            return true;
+        }
+        return false;
+    }
+
+    // Implementation of the updateFoodOption method (This method will be used in backend logic)
+    public boolean updateFoodOption(int bookingNo, boolean newFoodOption) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            b.setInFlightFoodAndDrinks(newFoodOption);
+            return true;
+        }
+        return false;
+    }
+
+    /* Adding the option to delete and cancel bookings in the backend of the system
+    Implemented using a boolean signature as a way to check if the operation is successful
+     */
+    public boolean cancelBooking(int bookingNo) {
+        Booking b = findBooking(bookingNo);
+        if (b != null) {
+            bookings.remove(b);
+            return true;
+        }
+        return false;
+    }
+
+
+    // Temporary testing Menu loop implementation
     public void menu(Scanner input, Customer customerObj) {
         boolean done = false;
         while (!done) {
@@ -240,7 +305,7 @@ public class CustomerManagementSystem {
                     }
                     // Catches error if any of the files don't exist
                     catch (FileNotFoundException e) {
-                        System.out.println("An error occurred.");
+                        System.out.println("Error 404: file 'flights.txt', 'seatings.txt' or 'bookings_<CustomerNo>.txt' not found.");
                         e.printStackTrace();
                     }
                     System.out.println("The program will proceed to exit");
@@ -295,7 +360,7 @@ public class CustomerManagementSystem {
         CustomerManagementSystem cms = new CustomerManagementSystem();
         System.out.println();
         
-        // Loads flight, customer and seating data
+        // Loads the flight, customer and seating data
         cms.loadFlights();
         cms.loadCustomers();
         cms.loadSeatings();
@@ -309,7 +374,7 @@ public class CustomerManagementSystem {
         // Initialises the menu, which takes in the customerObj to use for exiting the program (case "0")
         cms.menu(input, customerObj);
 
-        // User input closes when program is terminating
+        // User input closes when the program is terminating
         input.close();
     }
 }

@@ -29,7 +29,7 @@ public class Flight implements MyFileIO {
         this.aircraftType = aircraftType;
     }
 
-    //1 change that i made
+    //1 change that I made
     // getFlightNo method
     public void inputData(Scanner reader){
         flightNo = reader.next();
@@ -84,7 +84,7 @@ public class Flight implements MyFileIO {
     @Override
     public String toString(){
         return String.format(
-            "Flight no: %s\nDeparture Destination: %s\nArrival destination: %s\nDeparture date: %s\nArrival Date: %s\nDeparture time: %s\nArrival: %s\nStopover: %s\nTotal duration: %s\nAircaft Type: %s\n",
+            "Flight no: %s\nDeparture Destination: %s\nArrival destination: %s\nDeparture date: %s\nArrival Date: %s\nDeparture time: %s\nArrival: %s\nStopover: %s\nTotal duration: %s\nAircraft Type: %s\n",
             flightNo,
             departureDestination,
             arrivalDestination,
