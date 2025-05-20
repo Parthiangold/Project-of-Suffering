@@ -252,6 +252,45 @@ public class CustomerManagementSystem {
         return false;
     }
 
+    //Input Validation for SeatClass
+    private boolean isValidSeatClass(String input) {
+        return input.equalsIgnoreCase("Economy") ||
+               input.equalsIgnoreCase("Business") ||
+               input.equalsIgnoreCase("First Class");
+    }
+
+    //Temporary CLI Interface testing for the Booking Management methods
+    public void testBookingMenu(Scanner scanner) {
+        System.out.print("Please enter your customer ID: ");
+        int customerNo = Integer.parseInt(scanner.nextLine());
+
+        //Load bookings from "bookings_<customerNo>.txt"
+        bookings.clear(); //Clears prior arrayList before loading new instance
+        loadBookings(customerNo);
+
+        //Show all Current bookings for reference
+        if (bookings.isEmpty()) {
+            System.out.println("No bookings found under customer ID: " + customerNo);
+            return;
+        }
+
+        System.out.println("\n--- Your Bookings ---");
+        for (Booking b : bookings) {
+            System.out.println(b);
+        }
+
+        //Bring up prompt for user for which booking they wish to modify/manage
+        System.out.print("\nEnter booking number to manage: ");
+        int bookingNo = Integer.parseInt(scanner.nextLine());
+
+        //Check if valid
+        Booking b = findBooking(bookingNo);
+        if (b == null) {
+            System.out.println("Invalid booking number.");
+            return;
+        }
+    }
+
 
     // Temporary testing Menu loop implementation
     public void menu(Scanner input, Customer customerObj) {
