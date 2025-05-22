@@ -188,6 +188,40 @@ public class CustomerManagementSystem {
         return customerObj;
     }
 
+    
+
+    //use case 1, search and book a flight starts here
+
+    public void flightSearch(Scanner scanner){
+        System.out.println("Enter departure destination: ");
+        String departureDestination = scanner.nextLine();    
+        System.out.println("Enter arrival destination: ");
+        String arrivalDestination = scanner.nextLine();
+        System.out.println("Enter departure date (YYYY-MM-DD): ");
+        String departureDate = scanner.nextLine();
+        
+        boolean found= false;
+        System.out.println("Available Flights:");
+        for (Flight f: flights){
+            if (f.getDepartureDestination().equals(departureDestination) && f.getArrivalDestination().equals(arrivalDestination) && 
+            f.getDepartureDate().equals(departureDate)){
+                System.out.println(f);
+                found=true;
+            }
+            else{
+                System.out.println("No flights found for the given criteria.");
+        
+            }
+        } 
+    }
+
+
+
+
+
+
+
+
     //Adding new find and select bookings by ID logic
     public Booking findBooking(int bookingNo) {
         for (Booking b : bookings) {
@@ -427,6 +461,7 @@ public class CustomerManagementSystem {
             switch (menuInput) {
                 // Option 1 - Search and book a flight
                 case "1":
+                    flightSearch(input);
                     System.out.println("i wish i could search and book a flight out of this group project on jah :fire: :fire:");
                     break;
 
@@ -522,6 +557,8 @@ public class CustomerManagementSystem {
         cms.loadFlights();
         cms.loadCustomers();
         cms.loadSeatings();
+
+        
 
         // Customer user login, which also returns the object of the authorised customer to be used in the menu method
         Customer customerObj = cms.login(input);
