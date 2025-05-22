@@ -259,16 +259,34 @@ public class CustomerManagementSystem {
                 input.equalsIgnoreCase("First Class");
     }
 
+    // Saves the current 'bookings' list to the customer's file
+    public void saveBookingsToFile(Customer customer) {
+        try {
+            // Construct filename based on the customer's ID
+            String customerBookingFilename = "src/bookings_" + customer.getCustomerNo();
+            Formatter formatter = new Formatter(customerBookingFilename + ".txt");
+
+            // Write each booking in the list to the file
+            for (Booking b : bookings) {
+                b.outputData(formatter);
+            }
+            formatter.close();
+
+            System.out.println("Bookings saved successfully.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Unable to save bookings to file.");
+            e.printStackTrace();
+        }
+    }
+
     //Temporary CLI Interface testing for the Booking Management methods
-    public void testBookingMenu(Scanner scanner) {
+    public void testBookingMenu(Scanner scanner, Customer customer) {
         System.out.print("Please enter your customer ID: ");
         int customerNo = Integer.parseInt(scanner.nextLine());
 
-        //Load bookings from "bookings_<customerNo>.txt"
-        bookings.clear(); //Clears prior arrayList before loading new instance
-        loadBookings(customerNo);
+        bookings.clear();
+        loadBookings(customerNo); // Load bookings immediately
 
-        //Show all Current bookings for reference
         if (bookings.isEmpty()) {
             System.out.println("No bookings found under customer ID: " + customerNo);
             return;
@@ -279,81 +297,117 @@ public class CustomerManagementSystem {
             System.out.println(b);
         }
 
-        //Bring up prompt for user for which booking they wish to modify/manage
-        System.out.print("\nEnter booking number to manage: ");
-        int bookingNo = Integer.parseInt(scanner.nextLine());
+        // Submenu for managing bookings
+        boolean done = false;
+        while (!done) {
+            // Show the menu options
+            System.out.println("\n--- Booking Management Menu ---");
+            System.out.println("1. Update Seat Class");
+            System.out.println("2. Change Seats");
+            System.out.println("3. Update WiFi Option");
+            System.out.println("4. Update Food Option");
+            System.out.println("5. Cancel Booking");
+            System.out.println("0. Return to Main Menu");
+            System.out.print("\nEnter your choice: ");
 
-        //Check if valid
-        Booking b = findBooking(bookingNo);
-        if (b == null) {
-            System.out.println("Invalid booking number.");
-            return;
-        }
+            // Get user input
+            String choice = scanner.nextLine();
 
-        //Show selected booking and menu options
-        System.out.println("\nSelected booking:\n" + b);
-        System.out.println("1. Update Seat Class\n2. Change Seats\n3. Update WiFi Option\n4. Update Food Option\n5. Cancel Booking\n0. Return to Main Menu\n");
-        System.out.print("Enter option: ");
-        int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case "1": // Update seat class
+                    System.out.print("Enter booking number: ");
+                    int bookingNo = Integer.parseInt(scanner.nextLine());
+                    Booking b = findBooking(bookingNo); // Find the booking
 
-        //Menu logic
-        switch (choice) {
-            case 1:
-                System.out.print("Enter new seat class: ");
-                String newSeatClass = scanner.nextLine();
-                if (isValidSeatClass(newSeatClass)) {
-                    if (updateSeatClass(bookingNo, newSeatClass)) {
-                        System.out.println("Seat class updated successfully.");
+                    if (b != null) {
+                        System.out.print("Enter new seat class: ");
+                        String newSeatClass = scanner.nextLine();
+                        if (isValidSeatClass(newSeatClass)) {
+                            b.setSeatClassType(newSeatClass);
+                            System.out.println("Seat class updated successfully.");
+                        } else {
+                            System.out.println("Invalid seat class. Please enter Economy, Business, or First Class.");
+                        }
                     } else {
-                        System.out.println("Error updating seat class.");
+                        System.out.println("Invalid booking number.");
                     }
-                }
-                break;
-            case 2:
-                System.out.print("Enter new seat numbers (e.g. 1A, 2B, 3C): ");
-                String[] newSeats = scanner.nextLine().split(",");
-                if (updateSeats(bookingNo, newSeats)) {
-                    System.out.println("Seats updated successfully.");
-                } else {
-                    System.out.println("Error updating seats.");
-                }
-                break;
-            case 3:
-                System.out.print("Enter new WiFi option (true/false): ");
-                boolean newWiFiOption = Boolean.parseBoolean(scanner.nextLine());
-                if (updateWiFiOption(bookingNo, newWiFiOption)) {
-                    System.out.println("WiFi option updated successfully.");
-                } else {
-                    System.out.println("Error updating WiFi option.");
-                }
-                break;
+                    break;
 
-            case 4:
-                System.out.print("Enter new Food option (true/false): ");
-                boolean newFoodOption = Boolean.parseBoolean(scanner.nextLine());
-                if (updateFoodOption(bookingNo, newFoodOption)) {
-                    System.out.println("Food option updated successfully.");
-                } else {
-                    System.out.println("Error updating Food option.");
-                }
-                break;
+                case "2": // Change seats
+                    System.out.print("Enter booking number: ");
+                    bookingNo = Integer.parseInt(scanner.nextLine());
+                    b = findBooking(bookingNo);
 
-            case 5:
-                bookings.remove(b);
-                if (cancelBooking(bookingNo)) {
-                    System.out.println("Booking cancelled successfully.");
-                } else {
-                    System.out.println("Error cancelling booking.");
-                }
-                break;
-            case 0:
-                menu(scanner, login(scanner));
-                break;
+                    if (b != null) {
+                        System.out.print("Enter new seat numbers (comma-separated, e.g., '1A,1B'): ");
+                        String[] newSeats = scanner.nextLine().split(",");
+                        b.setBookedSeats(newSeats);
+                        System.out.println("Seats updated successfully.");
+                    } else {
+                        System.out.println("Invalid booking number.");
+                    }
+                    break;
 
+                case "3": // Update WiFi option
+                    System.out.print("Enter booking number: ");
+                    bookingNo = Integer.parseInt(scanner.nextLine());
+                    b = findBooking(bookingNo);
 
+                    if (b != null) {
+                        System.out.print("Enable in-flight WiFi? (true/false): ");
+                        boolean newWiFiOption = Boolean.parseBoolean(scanner.nextLine());
+                        b.setInFlightWiFi(newWiFiOption);
+                        System.out.println("WiFi option updated successfully.");
+                    } else {
+                        System.out.println("Invalid booking number.");
+                    }
+                    break;
+
+                case "4": // Update food option
+                    System.out.print("Enter booking number: ");
+                    bookingNo = Integer.parseInt(scanner.nextLine());
+                    b = findBooking(bookingNo);
+
+                    if (b != null) {
+                        System.out.print("Enable in-flight food and drinks? (true/false): ");
+                        boolean newFoodOption = Boolean.parseBoolean(scanner.nextLine());
+                        b.setInFlightFoodAndDrinks(newFoodOption);
+                        System.out.println("Food option updated successfully.");
+                    } else {
+                        System.out.println("Invalid booking number.");
+                    }
+                    break;
+
+                case "5": // Cancel booking
+                    System.out.print("Enter booking number to cancel: ");
+                    bookingNo = Integer.parseInt(scanner.nextLine());
+                    b = findBooking(bookingNo);
+
+                    if (b != null) {
+                        System.out.print("Are you sure you want to cancel this booking? (yes/no): ");
+                        String confirm = scanner.nextLine();
+                        if (confirm.equalsIgnoreCase("yes")) {
+                            bookings.remove(b); // Remove booking from the list
+                            System.out.println("Booking cancelled successfully.");
+                        } else {
+                            System.out.println("Cancellation aborted.");
+                        }
+                    } else {
+                        System.out.println("Invalid booking number.");
+                    }
+                    break;
+
+                case "0": // Exit submenu
+                    saveBookingsToFile(customer); // Save updates before exiting
+                    System.out.println("Returning to main menu...");
+                    done = true;
+                    break;
+
+                default: // Invalid input
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
         }
-
-
     }
 
 
@@ -378,7 +432,7 @@ public class CustomerManagementSystem {
 
                 // Option 2 - Manage flight bookings
                 case "2":
-                    testBookingMenu(input);
+                    testBookingMenu(input, customerObj);
                     break;
 
                 // Option 0 - Exit program
@@ -479,9 +533,11 @@ public class CustomerManagementSystem {
         cms.menu(input, customerObj);
 
         // Initialises the submenu for booking management
-        cms.testBookingMenu(input);
+
 
         // User input closes when the program is terminating
         input.close();
     }
+
+
 }
