@@ -289,6 +289,64 @@ public class CustomerManagementSystem {
             System.out.println("Invalid booking number.");
             return;
         }
+
+        //Show selected booking and menu options
+        System.out.println("\nSelected booking:\n" + b);
+        System.out.println("1. Update Seat Class\n2. Change Seats\n3. Update WiFi Option\n4. Update Food Option\n5. Cancel Booking\n0. Return to Main Menu\n");
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        //Menu logic
+        switch (choice) {
+            case 1:
+                System.out.print("Enter new seat class: ");
+                String newSeatClass = scanner.nextLine();
+                if (isValidSeatClass(newSeatClass)) {
+                    if (updateSeatClass(bookingNo, newSeatClass)) {
+                        System.out.println("Seat class updated successfully.");
+                    } else {
+                        System.out.println("Error updating seat class.");
+                    }
+                }
+            case 2:
+                System.out.print("Enter new seat numbers (e.g. 1A, 2B, 3C): ");
+                String[] newSeats = scanner.nextLine().split(",");
+                if (updateSeats(bookingNo, newSeats)) {
+                    System.out.println("Seats updated successfully.");
+                } else {
+                    System.out.println("Error updating seats.");
+                }
+            case 3:
+                System.out.print("Enter new WiFi option (true/false): ");
+                boolean newWiFiOption = Boolean.parseBoolean(scanner.nextLine());
+                if (updateWiFiOption(bookingNo, newWiFiOption)) {
+                    System.out.println("WiFi option updated successfully.");
+                } else {
+                    System.out.println("Error updating WiFi option.");
+                }
+                case 4:
+                System.out.print("Enter new Food option (true/false): ");
+                boolean newFoodOption = Boolean.parseBoolean(scanner.nextLine());
+                if (updateFoodOption(bookingNo, newFoodOption)) {
+                    System.out.println("Food option updated successfully.");
+                }
+                else {
+                    System.out.println("Error updating food option.");
+                }
+            case 5:
+                bookings.remove(b);
+                if (cancelBooking(bookingNo)) {
+                    System.out.println("Booking cancelled successfully.");
+                } else {
+                    System.out.println("Error cancelling booking.");
+                }
+            case 0:
+                menu(scanner, login(scanner));
+                break;
+
+
+        }
+
+
     }
 
 
@@ -313,7 +371,7 @@ public class CustomerManagementSystem {
 
                 // Option 2 - Manage flight bookings
                 case "2":
-                    System.out.println("managing these flights will be easier than managing this project ong :fire: :fire:");
+                    testBookingMenu(input);
                     break;
 
                 // Option 0 - Exit program
@@ -412,6 +470,9 @@ public class CustomerManagementSystem {
 
         // Initialises the menu, which takes in the customerObj to use for exiting the program (case "0")
         cms.menu(input, customerObj);
+
+        // Initialises the submenu for booking management
+        cms.testBookingMenu(input);
 
         // User input closes when the program is terminating
         input.close();
