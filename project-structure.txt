@@ -1,4 +1,3 @@
-C:/Users/nathf/IdeaProjects/Project-of-Suffering
 |-- Project-of-Suffering.iml
 |-- README.md
 |-- misc.xml
