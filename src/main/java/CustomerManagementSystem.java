@@ -23,7 +23,7 @@ public class CustomerManagementSystem {
     public void loadCustomers() {
         try {
             // Reads "customers.txt"
-            File filename = new File("src/customers.txt");
+            File filename = new File("src/main/resources/customers.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
@@ -47,7 +47,7 @@ public class CustomerManagementSystem {
     public void loadSeatings() {
         try {
             // Reads "seatings.txt"
-            File filename = new File("src/seatings.txt");
+            File filename = new File("src/main/resources/seatings.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
@@ -72,7 +72,7 @@ public class CustomerManagementSystem {
 
         try {
             // Reads the bookings txt file based on the authorised customer's number
-            String customerFile = "src/bookings_" + Integer.toString(customerNo) + ".txt";
+            String customerFile = "src/main/resources/bookings_" + Integer.toString(customerNo) + ".txt";
             File filename = new File(customerFile);
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
@@ -96,7 +96,7 @@ public class CustomerManagementSystem {
     // Loads the data from flights.txt and stores the data in the Flight Class
     public void loadFlights() {
         try {
-            File filename = new File("src/flights.txt");
+            File filename = new File("src/main/resources/flights.txt");
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
             while (reader.hasNext()) {
@@ -297,7 +297,7 @@ public class CustomerManagementSystem {
     public void saveBookingsToFile(Customer customer) {
         try {
             // Construct filename based on the customer's ID
-            String customerBookingFilename = "src/bookings_" + customer.getCustomerNo();
+            String customerBookingFilename = "src/main/resources/bookings_" + customer.getCustomerNo();
             Formatter formatter = new Formatter(customerBookingFilename + ".txt");
 
             // Write each booking in the list to the file

@@ -1,0 +1,38 @@
+C:/Users/nathf/IdeaProjects/Project-of-Suffering
+|-- Project-of-Suffering.iml
+|-- README.md
+|-- misc.xml
+|-- out
+|   `-- production
+|       `-- Project-of-Suffering
+|           |-- Booking.class
+|           |-- Customer.class
+|           |-- CustomerManagementSystem.class
+|           |-- Flight.class
+|           |-- MyFileIO.class
+|           |-- Seating.class
+|           |-- bookings.txt
+|           |-- customers.txt
+|           |-- flights.txt
+|           `-- seatings.txt
+|-- pom.xml
+|-- project-structure.txt
+`-- src
+    `-- main
+        |-- java
+        |   |-- Booking.java
+        |   |-- Customer.java
+        |   |-- CustomerManagementSystem.java
+        |   |-- Flight.java
+        |   |-- FlightBookingConfirmation.java
+        |   |-- FlightBookingForm.java
+        |   |-- MyFileIO.java
+        |   `-- Seating.java
+        `-- resources
+            |-- bookings_1.txt
+            |-- bookings_2.txt
+            |-- customers.txt
+            |-- flights.txt
+            `-- seatings.txt
+
+7 directories, 28 files
