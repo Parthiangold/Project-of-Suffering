@@ -299,7 +299,7 @@ public class CustomerManagementSystem {
     public void saveBookingsToFile(Customer customer) {
         try {
             // Construct filename based on the customer's ID
-            String customerBookingFilename = "src/main/resources/bookings_" + customer.getCustomerNo();
+            String customerBookingFilename = "src/main/resources/group/bookings_" + customer.getCustomerNo();
             Formatter formatter = new Formatter(customerBookingFilename + ".txt");
 
             // Write each booking in the list to the file
