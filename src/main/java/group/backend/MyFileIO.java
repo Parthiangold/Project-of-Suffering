@@ -1,4 +1,4 @@
-package group;
+package group.backend;
 
 import java.util.*;
 

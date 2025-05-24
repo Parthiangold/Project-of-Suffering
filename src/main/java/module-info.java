@@ -3,7 +3,8 @@ module group {
     requires javafx.fxml;
 
     opens group to javafx.fxml;
-    exports group;
     exports group.frontend;
     opens group.frontend to javafx.fxml;
+    exports group.backend;
+    opens group.backend to javafx.fxml;
 }
