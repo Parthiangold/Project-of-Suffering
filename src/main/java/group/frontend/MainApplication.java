@@ -6,32 +6,178 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import group.backend.Booking;
+import group.backend.Customer;
+import group.backend.Flight;
+import group.backend.Seating;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.Scanner;
 
 public class MainApplication extends Application {
 
-    private static Scene scene;
+    private ArrayList<Customer> customers;
+    private ArrayList<Flight> flights;
+    private ArrayList<Seating> seatings;
+    private ArrayList<Booking> bookings;
+    private int cNum;
     
-    // Creates stage window
+    private static MainApplication applicationInstance;
+
+    // Application instance is returned to the controller that calls it, enabling it to use methods
+    public static MainApplication getApplicationInstance() {
+        return applicationInstance;
+    }
+
+    // Application instance is initialised following launch() method
+    @Override
+    public void init() {
+        applicationInstance = this;
+    }
+
+    // Creates stage window and loads the login display
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("loginView"), 800, 600);
+        // Initialises ArrayLists
+        customers = new ArrayList<Customer>();
+        flights = new ArrayList<Flight>();
+        seatings = new ArrayList<Seating>();
+        bookings = new ArrayList<Booking>();
+        int cNum = 0;
+
+        // Loads data from text files into containers
+        loadFlights();
+        loadCustomers();
+        loadSeatings();
+
+        // Loads the login display (loginView.fxml), which also loads in the data from the ArrayLists
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group/loginView.fxml"));
+		loader.setControllerFactory(SceneSelector.createControllerFactory(customers, flights, seatings, bookings, cNum));
+        final Parent root = (Parent) loader.load();
+
+        // Creates scene
+		final Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
+        stage.setTitle("FlyDreamAir Customer Management System");
         stage.show();
     }
 
-    // Used to change views between fxml files
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    // Saves objects to files on exit
+    @Override
+    public void stop() {
+        try {
+            // Formats all flights into "flights.txt"
+            Formatter formatter = new Formatter("src/main/resources/group/flights.txt");
+            for (Flight f : flights) {
+                f.outputData(formatter);
+            }
+            formatter.close();
+
+            // Formats all seatings into "seatings.txt"
+            formatter = new Formatter("src/main/resources/group/seatings.txt");
+            for (Seating s : seatings) {
+                s.outputData(formatter);
+            }
+            formatter.close();
+
+            // Formats all bookings into "bookings_<CustomerNo>.txt" (passes if no customer is logged in)
+            if (cNum != 0) {
+                String customerBookingFilename = "src/main/resources/group/bookings_" + cNum;
+                formatter = new Formatter(customerBookingFilename + ".txt");
+                for (Booking b : bookings) {
+                    b.outputData(formatter);
+                }
+                formatter.close();
+            }
+            System.out.println("\nData has successfully been saved.");
+        }
+        // Catches error if any of the files don't exist
+        catch (FileNotFoundException e) {
+            System.out.println("Error 404: file 'flights.txt', 'seatings.txt' or 'bookings_<CustomerNo>.txt' not found.");
+            e.printStackTrace();
+        }
+        System.out.println("The program will proceed to exit");
     }
 
-    // Method used to load the name of an fxml file
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/group/" + fxml + ".fxml"));
-        return fxmlLoader.load();
+    // Used by controllers to track which customer is logged in
+    public void setCNum(int i) {
+        this.cNum = i;
+    }
+
+    // Loads the data from "customers.txt" and stores the data under the "Customer" class
+    public void loadCustomers() {
+        try {
+            // Reads "customers.txt"
+            File filename = new File("src/main/resources/group/customers.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+
+            // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
+            while (reader.hasNext()) {
+                Customer customerObj = new Customer();
+                customerObj.inputData(reader);
+                customers.add(customerObj);
+            }
+            reader.close();
+        }
+
+        // Catches error if "customers.txt" isn't found
+        catch (FileNotFoundException e) {
+            System.out.println("Error 404: file 'customers.txt' not found.");
+            e.printStackTrace();
+        }
+    }
+
+    // Loads the data from "seatings.txt" and stores the data under the "Seating" class
+    public void loadSeatings() {
+        try {
+            // Reads "seatings.txt"
+            File filename = new File("src/main/resources/group/seatings.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+
+            // For each line in the file, a new "Seating" object is created and has data inputted from the file and added to "seatings"
+            while (reader.hasNext()) {
+                Seating seatingObj = new Seating();
+                seatingObj.inputData(reader);
+                seatings.add(seatingObj);
+            }
+            reader.close();
+        }
+
+        // Catches error if "seatings.txt" isn't found
+        catch (FileNotFoundException e) {
+            System.out.println("Error 404: file 'seatings.txt' not found.");
+            e.printStackTrace();
+        }
+    }
+
+    // Loads the data from flights.txt and stores the data in the Flight Class
+    public void loadFlights() {
+        try {
+            File filename = new File("src/main/resources/group/flights.txt");
+            Scanner reader = new Scanner(filename);
+            reader.useDelimiter(",|\r\n|\n");
+            while (reader.hasNext()) {
+                Flight flightObj = new Flight();
+                flightObj.inputData(reader);
+                flights.add(flightObj);
+            }
+            reader.close();
+
+        }
+
+        // Catches error if "flights.txt" isn't found
+        catch (FileNotFoundException e) {
+            System.out.println("Error 404: file 'flights.txt' not found.");
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
