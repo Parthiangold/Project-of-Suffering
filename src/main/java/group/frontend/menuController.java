@@ -1,6 +1,7 @@
 package group.frontend;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -32,6 +33,9 @@ public class menuController {
 
     @FXML
     private TextField departureInput;
+
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private Button exitButton;
@@ -68,9 +72,10 @@ public class menuController {
         seatings.add(seatingObj);
     }
 
-    // Saves objects to files on exit
+    // Logs out of customer's account and sends the user back to the main menu
     @FXML
-    public void exitProgram() {
+    void logout() throws IOException {
+        testData();
         try {
             // Formats all flights into "flights.txt"
             Formatter formatter = new Formatter("src/main/resources/group/flights.txt");
@@ -86,13 +91,15 @@ public class menuController {
             }
             formatter.close();
 
-            // Formats all bookings into "bookings_<CustomerNo>.txt"
-            String customerBookingFilename = "src/main/resources/group/bookings_" + cNum;
-            formatter = new Formatter(customerBookingFilename + ".txt");
-            for (Booking b : bookings) {
-                b.outputData(formatter);
+            // Formats all bookings into "bookings_<CustomerNo>.txt" (passes if no customer is logged in)
+            if (cNum != 0) {
+                String customerBookingFilename = "src/main/resources/group/bookings_" + cNum;
+                formatter = new Formatter(customerBookingFilename + ".txt");
+                for (Booking b : bookings) {
+                    b.outputData(formatter);
+                }
+                formatter.close();
             }
-            formatter.close();
             System.out.println("\nData has successfully been saved.");
         }
         // Catches error if any of the files don't exist
@@ -100,7 +107,20 @@ public class menuController {
             System.out.println("Error 404: file 'flights.txt', 'seatings.txt' or 'bookings_<CustomerNo>.txt' not found.");
             e.printStackTrace();
         }
-        System.out.println("The program will proceed to exit");
+
+        // Following the saving of files, the bookings ArrayList is cleared for use by the different customer that logs in
+        bookings.clear();
+        cNum = 0;
+
+        // Scene changes to login display
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+		selector.selectScene("/group/loginView.fxml", adultInput.getScene());
+    }
+
+    // Saves objects to files on exit
+    @FXML
+    public void exitProgram() {
+        testData();
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
