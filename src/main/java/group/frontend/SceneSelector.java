@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.util.Callback;
 
-
 public class SceneSelector {
 	
 	private final Callback<Class<?>, Object> controllerFactory ;
