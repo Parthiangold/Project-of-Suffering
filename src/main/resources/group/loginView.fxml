@@ -24,7 +24,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="250.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter your email address">
+      <TextField fx:id="emailInput" layoutX="250.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter your email address">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,15 +34,20 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="250.0" layoutY="408.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter your password">
+      <TextField fx:id="passwordInput" layoutX="250.0" layoutY="408.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter your password">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button fx:id="loginButton" layoutX="250.0" layoutY="485.0" mnemonicParsing="false" onAction="#switchToMenuView" prefHeight="40.0" prefWidth="150.0" text="Login">
+      <Button fx:id="loginButton" layoutX="250.0" layoutY="485.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8bff;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Label fx:id="errorMessage" layoutX="250.0" layoutY="234.0" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
