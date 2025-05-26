@@ -37,7 +37,7 @@ public class MainApplication extends Application {
         applicationInstance = this;
     }
 
-    // Creates stage window and loads the login display
+    // Creates a stage window and loads the login display
     @Override
     public void start(Stage stage) throws Exception {
         // Initialises ArrayLists
