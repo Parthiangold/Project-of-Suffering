@@ -2,6 +2,7 @@ package group.frontend;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -11,6 +12,8 @@ import group.backend.Flight;
 import group.backend.Seating;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,7 +32,7 @@ public class menuController {
     private TextField childInput;
 
     @FXML
-    private TextField dateInput;
+    private DatePicker dateInput;
 
     @FXML
     private TextField departureInput;
@@ -45,6 +48,12 @@ public class menuController {
 
     @FXML
     private Button searchButton;
+
+    @FXML
+    private Label errorMessageSearch;
+
+    @FXML
+    private Label errorMessageManage;
 
     private ArrayList<Customer> customers;
     private ArrayList<Flight> flights;
@@ -75,7 +84,6 @@ public class menuController {
     // Logs out of customer's account and sends the user back to the main menu
     @FXML
     void logout() throws IOException {
-        testData();
         try {
             // Formats all flights into "flights.txt"
             Formatter formatter = new Formatter("src/main/resources/group/flights.txt");
@@ -111,6 +119,7 @@ public class menuController {
         // Following the saving of files, the bookings ArrayList is cleared for use by the different customer that logs in
         bookings.clear();
         cNum = 0;
+        MainApplication.getApplicationInstance().setCNum(cNum);
 
         // Scene changes to login display
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
@@ -120,8 +129,91 @@ public class menuController {
     // Saves objects to files on exit
     @FXML
     public void exitProgram() {
-        testData();
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    // Checks if inputs are valid in the search inputs or not, before proceeding with searching for flights
+    @FXML
+    public void inputCheck() throws IOException {
+        String departure = departureInput.getText();
+        String arrival = arrivalInput.getText();
+        String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        int adult = 0;
+        int child = 0;
+
+        // Error message if the user hasn't inputted anything in at least one of the text fields
+        if (departure.isEmpty() || arrival.isEmpty() || date.isEmpty() || adultInput.getText().isEmpty() || childInput.getText().isEmpty()) {
+            errorMessageSearch.setText("Please fill out each field.");
+        }
+
+        // System tries to parse the adult and child input as an int. If it fails, an error message appears
+        else if ((adultInput.getText().isEmpty() || childInput.getText().isEmpty()) != true) {
+            try {
+                adult = Integer.parseInt(adultInput.getText());
+                child = Integer.parseInt(childInput.getText());
+
+                // Also checks if adult is less than 1. If so, an error message appears
+                if (adult < 1) {
+                    errorMessageSearch.setText("Number of Adults must be '1' or more.");
+                }
+
+                // If it's above 1, then the program proceeds with searching for available flights
+                else {
+                    searchFlights(departure, arrival, date, adult, child);
+                }
+            } catch (NumberFormatException e) {
+                errorMessageSearch.setText("Adults and Children must be a #.");
+            }
+        }
+    }
+
+    // Method searches for available seats for flights based on user inputs
+    @FXML
+    public void searchFlights(String departure, String arrival, String date, int adult, int child) throws IOException {
+        // For-loop checks
+        int resultCounter = 0;
+        for (int i = 0; i < flights.size(); i++) {
+            Flight flightObj = flights.get(i);
+
+            // Vibe check
+            if (departure.equals(flightObj.getDepartureDestination()) 
+                    && arrival.equals(flightObj.getArrivalDestination()) 
+                    && date.equals(flightObj.getDepartureDate())) {
+                
+                // brj
+                for (int j = 0; j < seatings.size(); j++) {
+                    Seating seatingObj = seatings.get(j);
+
+                    // bre
+                    if ((flightObj.getFlightNo().equals(seatingObj.getFlightNo())) 
+                            && ((adult + child) <= seatingObj.getAvailableNo())) {
+                        System.out.println(flightObj.toString());
+                        System.out.println(seatingObj.toString());
+                        resultCounter += 1;
+                        errorMessageSearch.setText("");
+
+                    }
+                }
+            }
+
+            // Error message if either the email or password doesn't match what is stored
+            else if ((i == (flights.size() - 1)) && (resultCounter == 0)){
+                errorMessageSearch.setText("No flights for this route and date are available.");
+                break;
+            }
+        }
+
+        // Prevents NullPointerException
+        if (resultCounter > 0) {
+            switchToResultsView();
+        }
+    }
+
+    // Switches from menuView to resultsView following on search results retrieval
+    @FXML
+    private void switchToResultsView() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+		selector.selectScene("/group/resultsView.fxml", adultInput.getScene());
     }
 }

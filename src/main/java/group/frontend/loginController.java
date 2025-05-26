@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class loginController {
 
@@ -31,6 +32,9 @@ public class loginController {
 
     @FXML
     private Label errorMessage;
+
+    @FXML
+    private Button exitButton;
 
     private ArrayList<Customer> customers;
     private ArrayList<Flight> flights;
@@ -141,5 +145,12 @@ public class loginController {
             System.out.println("Error 404: file 'bookings.txt' not found.");
             e.printStackTrace();
         }
+    }
+
+    // Saves objects to files on exit
+    @FXML
+    public void exitProgram() {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }

@@ -2,13 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.menuController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.resultsController">
    <children>
       <Label layoutY="-1.0" text="FlyDreamAir Customer Management System">
          <font>
@@ -28,38 +27,7 @@
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="arrivalInput" layoutX="297.0" layoutY="205.0" prefHeight="40.0" prefWidth="205.0" promptText="Enter Arrival Airport">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <DatePicker fx:id="dateInput" layoutX="515.0" layoutY="205.0" prefHeight="40.0" prefWidth="205.0" promptText="Enter Departure Date" style="-fx-font-size: 16;" />
-      <TextField fx:id="adultInput" layoutX="80.0" layoutY="265.0" prefHeight="40.0" prefWidth="205.0" promptText="Enter # of Adults">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="childInput" layoutX="297.0" layoutY="265.0" prefHeight="40.0" prefWidth="205.0" promptText="Enter # of Children">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <Button fx:id="searchButton" layoutX="515.0" layoutY="265.0" mnemonicParsing="false" onAction="#inputCheck" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #1f8bff;" text="Search Flights" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
-      <Label layoutX="80.0" layoutY="355.0" text="Manage Bookings">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="bookingInput" layoutX="80.0" layoutY="398.0" prefHeight="40.0" prefWidth="205.0" promptText="Enter Booking ID">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <Button fx:id="manageButton" layoutX="297.0" layoutY="398.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #1f8bff;" text="Manage Booking" textFill="WHITE">
+      <Button fx:id="idk" layoutX="80.0" layoutY="260.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #1f8bff;" text="idk" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
