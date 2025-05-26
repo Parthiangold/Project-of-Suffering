@@ -171,21 +171,20 @@ public class menuController {
     // Method searches for available seats for flights based on user inputs
     @FXML
     public void searchFlights(String departure, String arrival, String date, int adult, int child) throws IOException {
-        // For-loop checks
+        // For-loop checks for any flights that match the departure location, arrival location and date of departure
         int resultCounter = 0;
         for (int i = 0; i < flights.size(); i++) {
             Flight flightObj = flights.get(i);
 
-            // Vibe check
             if (departure.equals(flightObj.getDepartureDestination()) 
                     && arrival.equals(flightObj.getArrivalDestination()) 
                     && date.equals(flightObj.getDepartureDate())) {
                 
-                // brj
+                // If it finds a flight with the above criteria, it then checks for available seatings under this flight
                 for (int j = 0; j < seatings.size(); j++) {
                     Seating seatingObj = seatings.get(j);
 
-                    // bre
+                    // If it successfully finds a flight, it adds 1 to the result counter and returns the result
                     if ((flightObj.getFlightNo().equals(seatingObj.getFlightNo())) 
                             && ((adult + child) <= seatingObj.getAvailableNo())) {
                         System.out.println(flightObj.toString());
@@ -210,10 +209,48 @@ public class menuController {
         }
     }
 
+    // Checks bookingID input which changes view
+    @FXML
+    public void searchBooking() throws IOException {
+        // If the bookingID input is empty, an error message is returned
+        if (bookingInput.getText().isEmpty()) {
+            errorMessageManage.setText("Please input a booking ID");
+        }
+
+        // Otherwise, it attempts to check if the input is an integer, otherwise an error message returns
+        else {
+            try {
+                int bookingID = Integer.parseInt(bookingInput.getText());
+                for (int i = 0; i < bookings.size(); i++) {
+                    Booking bookingObj = bookings.get(i);
+                    
+                    // If there is a booking with the matching ID, the display changes to the bookingView and returns the result
+                    if (bookingID == (bookingObj.getBookingNo())) {
+                        System.out.println(bookingObj.toString());
+                        errorMessageManage.setText("");
+                        switchToBookingView();
+                    } 
+                    else if (i == (bookings.size() - 1)) {
+                        errorMessageManage.setText("No existing booking under this ID");
+                    }
+                } 
+            } catch (NumberFormatException e) {
+                errorMessageManage.setText("Input must be a number");
+            }
+        }
+    }
+
     // Switches from menuView to resultsView following on search results retrieval
     @FXML
     private void switchToResultsView() throws IOException {
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
 		selector.selectScene("/group/resultsView.fxml", adultInput.getScene());
+    }
+
+    // Switches from menuView to bookingView following on booking ID input
+    @FXML
+    private void switchToBookingView() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+		selector.selectScene("/group/bookingView.fxml", adultInput.getScene());
     }
 }
