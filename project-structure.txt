@@ -1,70 +1,53 @@
+C:/Users/nathf_fzn2ofq/IdeaProjects/Project-of-Suffering
 |-- Project-of-Suffering.iml
 |-- README.md
 |-- misc.xml
+|-- out
+|   `-- production
+|       `-- Project-of-Suffering
+|           |-- Booking.class
+|           |-- Customer.class
+|           |-- CustomerManagementSystem.class
+|           |-- Flight.class
+|           |-- FlightBookingConfirmation.class
+|           |-- FlightBookingForm.class
+|           |-- MyFileIO.class
+|           |-- Seating.class
+|           |-- bookings_1.txt
+|           |-- bookings_2.txt
+|           |-- customers.txt
+|           |-- flights.txt
+|           `-- seatings.txt
 |-- pom.xml
 |-- project-structure.txt
-|-- src
-|   `-- main
-|       |-- java
-|       |   |-- group
-|       |   |   |-- Booking.java
-|       |   |   |-- Customer.java
-|       |   |   |-- CustomerManagementSystem.java
-|       |   |   |-- Flight.java
-|       |   |   |-- FlightBookingConfirmation.java
-|       |   |   |-- FlightBookingForm.java
-|       |   |   |-- MyFileIO.java
-|       |   |   `-- Seating.java
-|       |   `-- module-info.java
-|       `-- resources
-|           `-- group
-|               |-- bookings_1.txt
-|               |-- bookings_2.txt
-|               |-- customers.txt
-|               |-- flights.txt
-|               `-- seatings.txt
-`-- target
-    |-- classes
-    |   |-- bookings_1.txt
-    |   |-- bookings_2.txt
-    |   |-- customers.txt
-    |   |-- flights.txt
-    |   |-- group
-    |   |   |-- Booking.class
-    |   |   |-- Customer.class
-    |   |   |-- CustomerManagementSystem.class
-    |   |   |-- Flight.class
-    |   |   |-- FlightBookingConfirmation.class
-    |   |   |-- FlightBookingForm.class
-    |   |   |-- MyFileIO.class
-    |   |   |-- Seating.class
-    |   |   |-- bookings_1.txt
-    |   |   |-- bookings_2.txt
-    |   |   |-- customers.txt
-    |   |   |-- flights.txt
-    |   |   `-- seatings.txt
-    |   |-- main
-    |   |   `-- resources
-    |   |       |-- bookings_1.txt
-    |   |       |-- bookings_2.txt
-    |   |       |-- customers.txt
-    |   |       |-- flights.txt
-    |   |       |-- group
-    |   |       |   |-- bookings_1.txt
-    |   |       |   |-- bookings_2.txt
-    |   |       |   |-- customers.txt
-    |   |       |   |-- flights.txt
-    |   |       |   `-- seatings.txt
-    |   |       `-- seatings.txt
-    |   |-- module-info.class
-    |   `-- seatings.txt
-    |-- generated-sources
-    |   `-- annotations
-    `-- maven-status
-        `-- maven-compiler-plugin
-            `-- compile
-                `-- default-compile
-                    |-- createdFiles.lst
-                    `-- inputFiles.lst
+`-- src
+    `-- main
+        |-- java
+        |   |-- app
+        |   |-- group
+        |   |   |-- backend
+        |   |   |   |-- Booking.java
+        |   |   |   |-- Customer.java
+        |   |   |   |-- CustomerManagementSystem.java
+        |   |   |   |-- Flight.java
+        |   |   |   |-- MyFileIO.java
+        |   |   |   `-- Seating.java
+        |   |   `-- frontend
+        |   |       |-- FlightBookingConfirmation.java
+        |   |       |-- FlightBookingForm.java
+        |   |       |-- MainApplication.java
+        |   |       |-- SceneSelector.java
+        |   |       |-- loginController.java
+        |   |       `-- menuController.java
+        |   `-- module-info.java
+        `-- resources
+            `-- group
+                |-- bookings_1.txt
+                |-- bookings_2.txt
+                |-- customers.txt
+                |-- flights.txt
+                |-- loginView.fxml
+                |-- menuView.fxml
+                `-- seatings.txt
 
-18 directories, 50 files
+12 directories, 38 files
