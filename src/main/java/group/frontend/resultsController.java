@@ -101,4 +101,11 @@ public class resultsController {
 		selector.selectScene("/group/loginView.fxml", logoutButton.getScene());
     }
 
+    // Returns to the menu view
+    @FXML
+    public void back() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+		selector.selectScene("/group/MenuView.fxml", logoutButton.getScene());
+    }
+
 }

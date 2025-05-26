@@ -138,32 +138,36 @@ public class menuController {
     public void inputCheck() throws IOException {
         String departure = departureInput.getText();
         String arrival = arrivalInput.getText();
-        String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         int adult = 0;
         int child = 0;
 
         // Error message if the user hasn't inputted anything in at least one of the text fields
-        if (departure.isEmpty() || arrival.isEmpty() || date.isEmpty() || adultInput.getText().isEmpty() || childInput.getText().isEmpty()) {
+        if (departure.isEmpty() || arrival.isEmpty() || (dateInput.getValue() == null) || adultInput.getText().isEmpty() || childInput.getText().isEmpty()) {
             errorMessageSearch.setText("Please fill out each field.");
         }
-
+        
         // System tries to parse the adult and child input as an int. If it fails, an error message appears
         else if ((adultInput.getText().isEmpty() || childInput.getText().isEmpty()) != true) {
             try {
-                adult = Integer.parseInt(adultInput.getText());
-                child = Integer.parseInt(childInput.getText());
+                String date = dateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                try {
+                    adult = Integer.parseInt(adultInput.getText());
+                    child = Integer.parseInt(childInput.getText());
 
-                // Also checks if adult is less than 1. If so, an error message appears
-                if (adult < 1) {
-                    errorMessageSearch.setText("Number of Adults must be '1' or more.");
-                }
+                    // Also checks if adult is less than 1. If so, an error message appears
+                    if (adult < 1) {
+                        errorMessageSearch.setText("Number of Adults must be '1' or more.");
+                    }
 
-                // If it's above 1, then the program proceeds with searching for available flights
-                else {
-                    searchFlights(departure, arrival, date, adult, child);
+                    // If it's above 1, then the program proceeds with searching for available flights
+                    else {
+                        searchFlights(departure, arrival, date, adult, child);
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessageSearch.setText("Adults and Children must be a #.");
                 }
-            } catch (NumberFormatException e) {
-                errorMessageSearch.setText("Adults and Children must be a #.");
+            } catch (NullPointerException e) {
+                errorMessageSearch.setText("Invalid date input.");
             }
         }
     }

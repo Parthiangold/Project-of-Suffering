@@ -31,6 +31,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <PasswordField fx:id="passwordInput" layoutX="250.0" layoutY="412.0" prefHeight="40.0" prefWidth="300.0" promptText="enter your password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
       <Button fx:id="loginButton" layoutX="250.0" layoutY="485.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8bff;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -46,10 +51,5 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <PasswordField layoutX="250.0" layoutY="412.0" prefHeight="40.0" prefWidth="300.0" promptText="enter your password">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </PasswordField>
    </children>
 </AnchorPane>
