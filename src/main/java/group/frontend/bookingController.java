@@ -11,9 +11,13 @@ import group.backend.Flight;
 import group.backend.Seating;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class bookingController {
+
+    @FXML
+    private Label bookingDisplay;
 
     @FXML
     private Button backButton;
@@ -50,6 +54,11 @@ public class bookingController {
         this.bookings = bookings;
         this.cNum = cNum;
         this.bNum = bNum;
+    }
+
+    @FXML
+    public void initialize() {
+        displayBooking();
     }
 
     // Logs out of the customer's account and sends the user back to the main menu
@@ -104,6 +113,17 @@ public class bookingController {
             if (b.getBookingNo() == bNum) {
                 bookings.remove(b);
                 back();
+            }
+        }
+    }
+
+    // TODO Implement Booking details display
+    @FXML
+    public void displayBooking() {
+        for (Booking b : bookings) {
+            if ((b.getBookingNo()) == bNum) {
+                bookingDisplay.setText(b.toString());
+                break;
             }
         }
     }
