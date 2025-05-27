@@ -63,6 +63,7 @@ public class menuController {
 
     private ArrayList<Flight> flightResults;
     private ArrayList<Seating> seatingResults;
+    private int bNum;
 
     public menuController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum) {
         this.customers = customers;
@@ -72,6 +73,7 @@ public class menuController {
         this.cNum = cNum;
         flightResults = new ArrayList<Flight>();
         seatingResults = new ArrayList<Seating>();
+        this.bNum = 0;
     }
 
     // Debugging method used to test if file exports can save data made within the program
@@ -237,6 +239,7 @@ public class menuController {
                     if (bookingID == (bookingObj.getBookingNo())) {
                         System.out.println(bookingObj.toString());
                         errorMessageManage.setText("");
+                        bNum = bookingID;
                         switchToBookingView();
                     } 
                     else if (i == (bookings.size() - 1)) {
@@ -259,7 +262,7 @@ public class menuController {
     // Switches from menuView to bookingView following on booking ID input
     @FXML
     private void switchToBookingView() throws IOException {
-        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, bNum);
 		selector.selectScene("/group/bookingView.fxml", adultInput.getScene());
     }
 }

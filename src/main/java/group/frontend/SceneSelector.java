@@ -21,6 +21,10 @@ public class SceneSelector {
 		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum);
 	}
 
+	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, int bNum) {
+		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, bNum);
+	}
+
 	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults) {
 		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, flightResults, seatingResults);
 	}
@@ -55,6 +59,32 @@ public class SceneSelector {
 				}
 			}
 			
+		};
+	}
+
+	// For manage booking-related controllers
+	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, int bNum) {
+		return new Callback<Class<?>, Object>() {
+			@Override
+			public Object call(Class<?> type) {
+				try {
+					// Within the created SceneSelector object, it validates if the order of parameters is 4 ArrayLists followed by an int before returning
+					for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+						if (constructor.getParameterTypes().length == 6
+								&& constructor.getParameterTypes()[0]==ArrayList.class
+								&& constructor.getParameterTypes()[4]==int.class) {
+							return constructor.newInstance(customers, flights, seatings, bookings, cNum, bNum);
+						}
+					}
+					return type.getDeclaredConstructor().newInstance();
+				}
+				// Nothing is returned if the above pattern of expected parameters aren't fulfilled
+				catch (Exception exc) {
+					exc.printStackTrace();
+					return null ;
+				}
+			}
+
 		};
 	}
 

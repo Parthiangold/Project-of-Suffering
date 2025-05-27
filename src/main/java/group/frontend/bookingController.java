@@ -41,16 +41,18 @@ public class bookingController {
     private ArrayList<Seating> seatings;
     private ArrayList<Booking> bookings;
     private int cNum;
+    private int bNum;
 
-    public bookingController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum) {
+    public bookingController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, int bNum) {
         this.customers = customers;
         this.flights = flights;
         this.seatings = seatings;
         this.bookings = bookings;
         this.cNum = cNum;
+        this.bNum = bNum;
     }
 
-    // Logs out of customer's account and sends the user back to the main menu
+    // Logs out of the customer's account and sends the user back to the main menu
     @FXML
     void logout() throws IOException {
         try {
@@ -93,6 +95,24 @@ public class bookingController {
         // Scene changes to login display
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
 		selector.selectScene("/group/loginView.fxml", updateClassButton.getScene());
+    }
+
+    // Cancel bookings controller method works by fetching BookingNo from the backend
+    @FXML
+    void cancelBooking()  throws IOException{
+        for (Booking b : bookings) {
+            if (b.getBookingNo() == bNum) {
+                bookings.remove(b);
+                back();
+            }
+        }
+    }
+
+    // Returns to the menu view
+    @FXML
+    public void back() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+        selector.selectScene("/group/MenuView.fxml", logoutButton.getScene());
     }
 
     // Saves objects to files on exit
