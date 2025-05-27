@@ -1,3 +1,3 @@
-1,FDA456,1A,1B,2,0,315.00,10-06-2025,Business,true,true
+1,FDA123,1A;1B,2,0,315.00,10-06-2025,Business,true,true
 2,FDA456,3B;3C;3D,1,2,410.00,11-06-2025,Business,false,true
 3,FDA789,1C,1,0,325.00,12-06-2025,Economy,true,false
