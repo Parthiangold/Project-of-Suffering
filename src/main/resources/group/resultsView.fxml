@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.resultsController">
    <children>
@@ -37,11 +38,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="resultCount" layoutX="719.0" layoutY="67.0" textAlignment="RIGHT">
+      <Text fx:id="resultCount" layoutX="285.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="434.66666666666674">
          <font>
             <Font size="18.0" />
-         </font>
-      </Label>
+         </font></Text>
       <Button fx:id="backButton" layoutY="560.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #114680; -fx-background-radius: 0;" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />

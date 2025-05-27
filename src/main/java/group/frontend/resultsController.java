@@ -12,6 +12,7 @@ import group.backend.Seating;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class resultsController {
@@ -29,7 +30,7 @@ public class resultsController {
     private Button logoutButton;
 
     @FXML
-    private Label resultCount;
+    private Text resultCount;
 
     private ArrayList<Customer> customers;
     private ArrayList<Flight> flights;
@@ -47,6 +48,10 @@ public class resultsController {
         this.cNum = cNum;
         this.flightResults = flightResults;
         this.seatingResults = seatingResults;
+    }
+
+    @FXML
+    public void initialize() {
         displayResults();
     }
 
@@ -110,10 +115,11 @@ public class resultsController {
     }
 
     // Displays the search results
+    @FXML
     public void displayResults() {
         for (int i = 0; i < flightResults.size(); i++) {
             Flight flightObj = flightResults.get(i);
-            System.out.println(flightObj.toString());
+            resultCount.setText(flightResults.size() + " Result(s) Returned:");
         }
     }
 

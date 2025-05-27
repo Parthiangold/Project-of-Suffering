@@ -1,6 +1,7 @@
 module group {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
 
     opens group to javafx.fxml;
     exports group.frontend;
