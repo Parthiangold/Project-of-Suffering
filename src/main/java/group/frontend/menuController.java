@@ -61,12 +61,17 @@ public class menuController {
     private ArrayList<Booking> bookings;
     private int cNum;
 
+    private ArrayList<Flight> flightResults;
+    private ArrayList<Seating> seatingResults;
+
     public menuController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum) {
         this.customers = customers;
         this.flights = flights;
         this.seatings = seatings;
         this.bookings = bookings;
         this.cNum = cNum;
+        flightResults = new ArrayList<Flight>();
+        seatingResults = new ArrayList<Seating>();
     }
 
     // Debugging method used to test if file exports can save data made within the program
@@ -191,8 +196,8 @@ public class menuController {
                     // If it successfully finds a flight, it adds 1 to the result counter and returns the result
                     if ((flightObj.getFlightNo().equals(seatingObj.getFlightNo())) 
                             && ((adult + child) <= seatingObj.getAvailableNo())) {
-                        System.out.println(flightObj.toString());
-                        System.out.println(seatingObj.toString());
+                        flightResults.add(flightObj);
+                        seatingResults.add(seatingObj);
                         resultCounter += 1;
                         errorMessageSearch.setText("");
 
@@ -247,7 +252,7 @@ public class menuController {
     // Switches from menuView to resultsView following on search results retrieval
     @FXML
     private void switchToResultsView() throws IOException {
-        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, flightResults, seatingResults);
 		selector.selectScene("/group/resultsView.fxml", adultInput.getScene());
     }
 

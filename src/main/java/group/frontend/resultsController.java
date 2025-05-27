@@ -12,19 +12,12 @@ import group.backend.Seating;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class resultsController {
 
     @FXML
-    private TextField departureInput;
-
-    @FXML
-    private Label errorMessageManage;
-
-    @FXML
-    private Label errorMessageSearch;
+    private Button backButton;
 
     @FXML
     private Button exitButton;
@@ -35,18 +28,26 @@ public class resultsController {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Label resultCount;
+
     private ArrayList<Customer> customers;
     private ArrayList<Flight> flights;
     private ArrayList<Seating> seatings;
     private ArrayList<Booking> bookings;
     private int cNum;
+    private ArrayList<Flight> flightResults;
+    private ArrayList<Seating> seatingResults;
 
-    public resultsController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum) {
+    public resultsController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating>seatingResults) {
         this.customers = customers;
         this.flights = flights;
         this.seatings = seatings;
         this.bookings = bookings;
         this.cNum = cNum;
+        this.flightResults = flightResults;
+        this.seatingResults = seatingResults;
+        displayResults();
     }
 
     // Saves objects to files on exit
@@ -106,6 +107,14 @@ public class resultsController {
     public void back() throws IOException {
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
 		selector.selectScene("/group/MenuView.fxml", logoutButton.getScene());
+    }
+
+    // Displays the search results
+    public void displayResults() {
+        for (int i = 0; i < flightResults.size(); i++) {
+            Flight flightObj = flightResults.get(i);
+            System.out.println(flightObj.toString());
+        }
     }
 
 }
