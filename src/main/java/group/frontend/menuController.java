@@ -224,6 +224,7 @@ public class menuController {
     @FXML
     public void searchBooking() throws IOException {
         // If the bookingID input is empty, an error message is returned
+        boolean result = false;
         if (bookingInput.getText().isEmpty()) {
             errorMessageManage.setText("Please input a booking ID");
         }
@@ -240,7 +241,8 @@ public class menuController {
                         System.out.println(bookingObj.toString());
                         errorMessageManage.setText("");
                         bNum = bookingID;
-                        switchToBookingView();
+                        result = true;
+                        break;
                     } 
                     else if (i == (bookings.size() - 1)) {
                         errorMessageManage.setText("No existing booking under this ID");
@@ -249,6 +251,10 @@ public class menuController {
             } catch (NumberFormatException e) {
                 errorMessageManage.setText("Input must be a number");
             }
+        }
+
+        if (result) {
+            switchToBookingView();
         }
     }
 
