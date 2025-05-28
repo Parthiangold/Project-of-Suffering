@@ -99,3 +99,24 @@ public class Seating implements MyFileIO {
         + "Adult Price: $%.2f\t   Child Price: $%.2f\tAvailable Number of Seats: %d", seatClassType, adultPricing, childPricing, availableNo);
     }
 }
+
+    // Marks a seat as booked by removing it from the availableSeats list
+    public void markSeatAsBooked(String seat) {
+        if (availableSeats.contains(seat)) {
+            availableSeats.remove(seat);
+            availableNo--; // Decrement available seat count
+        } else {
+            System.out.println("Seat " + seat + " is already booked or does not exist.");
+        }
+    }
+
+    // Marks a seat as available by adding it back to the availableSeats list
+    public void markSeatAsAvailable(String seat) {
+        if (!availableSeats.contains(seat)) {
+            availableSeats.add(seat);
+            availableNo++; // Increment available seat count
+        } else {
+            System.out.println("Seat " + seat + " is already available.");
+        }
+    }
+}
