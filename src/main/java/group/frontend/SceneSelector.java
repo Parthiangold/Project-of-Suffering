@@ -25,8 +25,19 @@ public class SceneSelector {
 		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, bNum);
 	}
 
-	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults) {
-		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, flightResults, seatingResults);
+	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, 
+	ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child) {
+		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child);
+	}
+
+	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, 
+	ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child, Flight flightObj, Seating seatingObj) {
+		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child, flightObj, seatingObj);
+	}
+
+	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, 
+	ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child, Flight flightObj, Seating seatingObj, String[] bookedSeats, boolean wifi, boolean fnd, double price) {
+		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child, flightObj, seatingObj, bookedSeats, wifi, fnd, price);
 	}
 	
 	// Loads the fxml with the parameters of the called controller class
@@ -63,7 +74,8 @@ public class SceneSelector {
 	}
 
 	// For manage booking-related controllers
-	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, int bNum) {
+	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, 
+	ArrayList<Booking> bookings, int cNum, int bNum) {
 		return new Callback<Class<?>, Object>() {
 			@Override
 			public Object call(Class<?> type) {
@@ -88,19 +100,87 @@ public class SceneSelector {
 		};
 	}
 
-	// For search flight-related controllers
-	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults) {
+	// For resultsController
+	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, 
+	ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child) {
 		return new Callback<Class<?>, Object>() {
 			@Override
 			public Object call(Class<?> type) {
 				try {
 					// Within the created SceneSelector object, it validates if the order of parameters is 4 ArrayLists followed by an int before returning
 					for (Constructor<?> constructor : type.getDeclaredConstructors()) {
-						if (constructor.getParameterTypes().length == 7 
+						if (constructor.getParameterTypes().length == 9 
 								&& constructor.getParameterTypes()[0]==ArrayList.class 
 								&& constructor.getParameterTypes()[4]==int.class
-								&& constructor.getParameterTypes()[5]==ArrayList.class) {
-							return constructor.newInstance(customers, flights, seatings, bookings, cNum, flightResults, seatingResults);
+								&& constructor.getParameterTypes()[5]==ArrayList.class
+								&& constructor.getParameterTypes()[7]==int.class) {
+							return constructor.newInstance(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child);
+						}
+					}
+					return type.getDeclaredConstructor().newInstance();
+				} 
+				// Nothing is returned if the above pattern of expected parameters aren't fulfilled
+				catch (Exception exc) {
+					exc.printStackTrace();
+					return null ;
+				}
+			}
+			
+		};
+	}
+
+	// For flightController
+	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, 
+	ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child, Flight flightObj, Seating seatingObj) {
+		return new Callback<Class<?>, Object>() {
+			@Override
+			public Object call(Class<?> type) {
+				try {
+					// Within the created SceneSelector object, it validates if the order of parameters is 4 ArrayLists followed by an int before returning
+					for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+						if (constructor.getParameterTypes().length == 11 
+								&& constructor.getParameterTypes()[0]==ArrayList.class 
+								&& constructor.getParameterTypes()[4]==int.class
+								&& constructor.getParameterTypes()[5]==ArrayList.class
+								&& constructor.getParameterTypes()[7]==int.class
+								&& constructor.getParameterTypes()[9]==Flight.class
+								&& constructor.getParameterTypes()[10]==Seating.class) {
+							return constructor.newInstance(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child, flightObj, seatingObj);
+						}
+					}
+					return type.getDeclaredConstructor().newInstance();
+				} 
+				// Nothing is returned if the above pattern of expected parameters aren't fulfilled
+				catch (Exception exc) {
+					exc.printStackTrace();
+					return null ;
+				}
+			}
+			
+		};
+	}
+
+	// For transactionController
+	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, 
+	ArrayList<Booking> bookings, int cNum, ArrayList<Flight> flightResults, ArrayList<Seating> seatingResults, int adult, int child, Flight flightObj, Seating seatingObj, 
+	String[] bookedSeats, boolean wifi, boolean fnd, double price) {
+		return new Callback<Class<?>, Object>() {
+			@Override
+			public Object call(Class<?> type) {
+				try {
+					// Within the created SceneSelector object, it validates if the order of parameters is 4 ArrayLists followed by an int before returning
+					for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+						if (constructor.getParameterTypes().length == 15 
+								&& constructor.getParameterTypes()[0]==ArrayList.class 
+								&& constructor.getParameterTypes()[4]==int.class
+								&& constructor.getParameterTypes()[5]==ArrayList.class
+								&& constructor.getParameterTypes()[7]==int.class
+								&& constructor.getParameterTypes()[9]==Flight.class
+								&& constructor.getParameterTypes()[10]==Seating.class
+								&& constructor.getParameterTypes()[11]==String[].class
+								&& constructor.getParameterTypes()[12]==boolean.class
+								&& constructor.getParameterTypes()[14]==double.class) {
+							return constructor.newInstance(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child, flightObj, seatingObj, bookedSeats, wifi, fnd, price);
 						}
 					}
 					return type.getDeclaredConstructor().newInstance();

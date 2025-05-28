@@ -216,7 +216,7 @@ public class menuController {
 
         // Prevents NullPointerException
         if (resultCounter > 0) {
-            switchToResultsView();
+            switchToResultsView(adult, child);
         }
     }
 
@@ -260,8 +260,8 @@ public class menuController {
 
     // Switches from menuView to resultsView following on search results retrieval
     @FXML
-    private void switchToResultsView() throws IOException {
-        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, flightResults, seatingResults);
+    private void switchToResultsView(int adult, int child) throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, flightResults, seatingResults, adult, child);
 		selector.selectScene("/group/resultsView.fxml", adultInput.getScene());
     }
 

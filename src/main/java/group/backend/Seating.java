@@ -79,8 +79,8 @@ public class Seating implements MyFileIO {
     }
 
     // Gets the list of available seats
-    public List<String> getAvailableSeats() {
-        return availableSeats;
+    public ArrayList<String> getAvailableSeats() {
+        return this.availableSeats;
     }
 
     // String output of an object
@@ -92,6 +92,13 @@ public class Seating implements MyFileIO {
         + "Available Number of Seats: %d\n"
         + "Available Seats: %s", flightNo, seatClassType, adultPricing, childPricing, availableNo, availableSeats);
     }
+
+    // For search method
+    public String overviewString() {
+        return String.format("Seat Class Type: %s\n"
+        + "Adult Price: $%.2f\t   Child Price: $%.2f\tAvailable Number of Seats: %d", seatClassType, adultPricing, childPricing, availableNo);
+    }
+}
 
     // Marks a seat as booked by removing it from the availableSeats list
     public void markSeatAsBooked(String seat) {
