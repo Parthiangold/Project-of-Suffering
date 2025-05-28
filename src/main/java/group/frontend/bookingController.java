@@ -117,7 +117,7 @@ public class bookingController {
         }
     }
 
-    // TODO Implement Booking details display
+    // Displays the selected booking the end user inputs from the main menu.
     @FXML
     public void displayBooking() {
         for (Booking b : bookings) {
@@ -126,6 +126,10 @@ public class bookingController {
                 break;
             }
         }
+    }
+
+    // TODO: Implement Change Seats Functionality to the UI
+    public void changeSeat() {
     }
 
     // Returns to the menu view
