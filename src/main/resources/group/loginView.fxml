@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.loginController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.loginController">
    <children>
       <Text layoutX="199.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FlyDreamAir Customer Management System" textAlignment="CENTER" wrappingWidth="401.52801513671875">
          <font>
@@ -31,12 +35,12 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordInput" layoutX="250.0" layoutY="412.0" prefHeight="40.0" prefWidth="300.0" promptText="enter your password">
+      <PasswordField fx:id="passwordInput" layoutX="250.0" layoutY="412.0" prefHeight="40.0" prefWidth="300.0" promptText="Enter your password">
          <font>
             <Font size="18.0" />
          </font>
       </PasswordField>
-      <Button fx:id="loginButton" layoutX="250.0" layoutY="485.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #1f8bff;" text="Login" textFill="WHITE">
+      <Button fx:id="loginButton" layoutX="250.0" layoutY="485.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="144.0" style="-fx-background-color: #1f8bff;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -49,6 +53,11 @@
       <Button fx:id="exitButton" layoutX="710.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ff5656; -fx-background-radius: 0;" text="Exit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="signUpButton" layoutX="406.0" layoutY="485.0" mnemonicParsing="false" onAction="#signUp" prefHeight="40.0" prefWidth="144.0" style="-fx-background-color: #1f8bff;" text="Sign Up" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Button>
    </children>

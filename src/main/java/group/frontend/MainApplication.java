@@ -68,8 +68,15 @@ public class MainApplication extends Application {
     @Override
     public void stop() {
         try {
+            // Formats all customers into "customers.txt"
+            Formatter formatter = new Formatter("src/main/resources/group/customers.txt");
+            for (Customer c : customers) {
+                c.outputData(formatter);
+            }
+            formatter.close();
+
             // Formats all flights into "flights.txt"
-            Formatter formatter = new Formatter("src/main/resources/group/flights.txt");
+            formatter = new Formatter("src/main/resources/group/flights.txt");
             for (Flight f : flights) {
                 f.outputData(formatter);
             }

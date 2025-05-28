@@ -63,7 +63,6 @@ public class menuController {
 
     private ArrayList<Flight> flightResults;
     private ArrayList<Seating> seatingResults;
-    private int bNum;
 
     public menuController(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum) {
         this.customers = customers;
@@ -73,7 +72,6 @@ public class menuController {
         this.cNum = cNum;
         flightResults = new ArrayList<Flight>();
         seatingResults = new ArrayList<Seating>();
-        this.bNum = 0;
     }
 
     // Debugging method used to test if file exports can save data made within the program
@@ -224,6 +222,7 @@ public class menuController {
     @FXML
     public void searchBooking() throws IOException {
         // If the bookingID input is empty, an error message is returned
+        Booking bookingObj = null;
         boolean result = false;
         if (bookingInput.getText().isEmpty()) {
             errorMessageManage.setText("Please input a booking ID");
@@ -234,13 +233,11 @@ public class menuController {
             try {
                 int bookingID = Integer.parseInt(bookingInput.getText());
                 for (int i = 0; i < bookings.size(); i++) {
-                    Booking bookingObj = bookings.get(i);
+                    bookingObj = bookings.get(i);
                     
                     // If there is a booking with the matching ID, the display changes to the bookingView and returns the result
                     if (bookingID == (bookingObj.getBookingNo())) {
-                        System.out.println(bookingObj.toString());
                         errorMessageManage.setText("");
-                        bNum = bookingID;
                         result = true;
                         break;
                     } 
@@ -254,7 +251,7 @@ public class menuController {
         }
 
         if (result) {
-            switchToBookingView();
+            switchToBookingView(bookingObj);
         }
     }
 
@@ -267,8 +264,8 @@ public class menuController {
 
     // Switches from menuView to bookingView following on booking ID input
     @FXML
-    private void switchToBookingView() throws IOException {
-        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, bNum);
+    private void switchToBookingView(Booking bookingObj) throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, bookingObj);
 		selector.selectScene("/group/bookingView.fxml", adultInput.getScene());
     }
 }

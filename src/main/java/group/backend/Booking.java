@@ -90,9 +90,34 @@ public class Booking implements MyFileIO {
         return bookingNo;
     }
 
+    // Gets the class type of the seating
+    public String getFlightNo() {
+        return this.flightNo;
+    }
+
+    // Get adult number
+    public int getAdult() {
+        return adultNo;
+    }
+
+    // Get child number
+    public int getChild() {
+        return childNo;
+    }
+
     // Getter method for seatClassType
     public String getSeatClassType() {
         return seatClassType;
+    }
+
+    // Get booked seats
+    public String[] getBookedSeats() {
+        return bookedSeats;
+    }
+
+    // Get price
+    public double getPrice() {
+        return price;
     }
 
     // Getter method for in-flight Wi-Fi

@@ -2,6 +2,8 @@ package group.frontend;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.regex.Pattern;
@@ -212,7 +214,9 @@ public class transactionController {
     public void confirmBooking() throws IOException {
         // Appends the newly created booking to the bookings ArrayList
         int bookingNo = (bookings.get(bookings.size()-1).getBookingNo()) + 1;
-        Booking newBooking = new Booking(bookingNo, flightObj.getFlightNo(), bookedSeats, adult, child, price, "23", seatingObj.getSeatClassType(), inFlightWiFi, inFlightFoodAndDrinks);
+        LocalDate today = LocalDate.now();
+        String date = today.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        Booking newBooking = new Booking(bookingNo, flightObj.getFlightNo(), bookedSeats, adult, child, price, date, seatingObj.getSeatClassType(), inFlightWiFi, inFlightFoodAndDrinks);
         bookings.add(newBooking);
 
         // This entire loop is dedicated to the removal of booked seats in the seatingObj of the booked flight

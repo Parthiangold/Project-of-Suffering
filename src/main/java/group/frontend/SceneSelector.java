@@ -21,8 +21,8 @@ public class SceneSelector {
 		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum);
 	}
 
-	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, int bNum) {
-		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, bNum);
+	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, Booking bookingObj) {
+		controllerFactory = createControllerFactory(customers, flights, seatings, bookings, cNum, bookingObj);
 	}
 
 	public SceneSelector(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, ArrayList<Booking> bookings, int cNum, 
@@ -75,7 +75,7 @@ public class SceneSelector {
 
 	// For manage booking-related controllers
 	public static final Callback<Class<?>, Object> createControllerFactory(ArrayList<Customer> customers, ArrayList<Flight> flights, ArrayList<Seating> seatings, 
-	ArrayList<Booking> bookings, int cNum, int bNum) {
+	ArrayList<Booking> bookings, int cNum, Booking bookingObj) {
 		return new Callback<Class<?>, Object>() {
 			@Override
 			public Object call(Class<?> type) {
@@ -84,8 +84,9 @@ public class SceneSelector {
 					for (Constructor<?> constructor : type.getDeclaredConstructors()) {
 						if (constructor.getParameterTypes().length == 6
 								&& constructor.getParameterTypes()[0]==ArrayList.class
-								&& constructor.getParameterTypes()[4]==int.class) {
-							return constructor.newInstance(customers, flights, seatings, bookings, cNum, bNum);
+								&& constructor.getParameterTypes()[4]==int.class
+								&& constructor.getParameterTypes()[5]==Booking.class) {
+							return constructor.newInstance(customers, flights, seatings, bookings, cNum, bookingObj);
 						}
 					}
 					return type.getDeclaredConstructor().newInstance();
