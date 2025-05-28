@@ -12,7 +12,11 @@ import group.backend.Seating;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class bookingController {
 
@@ -103,33 +107,49 @@ public class bookingController {
 
         // Scene changes to login display
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
-		selector.selectScene("/group/loginView.fxml", updateClassButton.getScene());
+        selector.selectScene("/group/loginView.fxml", updateClassButton.getScene());
     }
 
     // Cancel bookings controller method works by fetching BookingNo from the backend
     @FXML
-    void cancelBooking()  throws IOException{
-        for (Booking b : bookings) {
-            if (b.getBookingNo() == bNum) {
-                bookings.remove(b);
-                back();
-            }
+    void cancelBooking() throws IOException {
+        Optional<Booking> bookingToRemove = bookings.stream()
+                .filter(b -> b.getBookingNo() == bNum)
+                .findFirst();
+
+        if (bookingToRemove.isPresent()) {
+            bookings.remove(bookingToRemove.get());
+            System.out.println("Booking cancelled successfully.");
+            back();
+        } else {
+            System.out.println("Booking not found to cancel.");
         }
     }
 
     // Displays the selected booking the end user inputs from the main menu.
     @FXML
     public void displayBooking() {
-        for (Booking b : bookings) {
-            if ((b.getBookingNo()) == bNum) {
-                bookingDisplay.setText(b.toString());
-                break;
-            }
-        }
+        bookings.stream()
+                .filter(b -> b.getBookingNo() == bNum)
+                .findFirst()
+                .ifPresentOrElse(
+                        b -> bookingDisplay.setText(b.toString()),
+                        () -> bookingDisplay.setText("Booking not found")
+                );
     }
 
-    // TODO: Implement Change Seats Functionality to the UI
-    public void changeSeat() {
+    // Navigates to change seat scene
+    @FXML
+    void changeSeat() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum, bNum);
+        selector.selectScene("/group/changeSeatView.fxml", changeSeatButton.getScene());
+    }
+
+    void updateClass() throws IOException {
+
+    }
+
+    void updateServices() throws IOException {
     }
 
     // Returns to the menu view
@@ -145,5 +165,4 @@ public class bookingController {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-
 }
