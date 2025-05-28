@@ -37,6 +37,9 @@ public class loginController {
     @FXML
     private Button exitButton;
 
+    @FXML
+    private Button signUpButton;
+
     private ArrayList<Customer> customers;
     private ArrayList<Flight> flights;
     private ArrayList<Seating> seatings;
@@ -146,6 +149,13 @@ public class loginController {
             System.out.println("Error 404: file 'bookings.txt' not found.");
             e.printStackTrace();
         }
+    }
+
+    // Sign up for an account
+    @FXML
+    private void signUp() throws IOException {
+        SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);
+		selector.selectScene("/group/signUpView.fxml", emailInput.getScene());
     }
 
     // Saves objects to files on exit

@@ -23,6 +23,11 @@ public class Customer {
         password = reader.next();
     }
 
+    // Writes objects to a text file
+    public void outputData(Formatter formatter) {
+        formatter.format("%d,%s,%s,%s\n", customerNo, name, email, password);
+    }
+
     // Returns the "email" attribute
     public String getEmail() {
         return this.email;
