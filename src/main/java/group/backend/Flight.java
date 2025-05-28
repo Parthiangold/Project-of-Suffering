@@ -98,5 +98,12 @@ public class Flight implements MyFileIO {
             totalDuration,
             aircraftType);
             }
+
+    public String overviewString() {
+        return String.format("Flight No: %s\n" 
+        + "Departure: %s @ %s %s\n"
+        + "Arrival: %s @ %s %s\n"
+        + "Flight Duration: %s\t Stopover: %s\tAircraft Type: %s\n", flightNo, departureDestination, departureTime, departureDate, arrivalDestination, arrivalTime, arrivalDate, totalDuration, stopover, aircraftType);
+    }
     
 }

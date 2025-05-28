@@ -23,13 +23,13 @@ public class Booking implements MyFileIO {
      */
 
     public Booking(int bookingNo, String flightNo, String[] bookedSeats, int adultNo, int childNo, double price, String purchaseDate, String seatClassType, boolean inFlightWiFi, boolean inFlightFoodAndDrinks) {
-        this.bookingNo = bookingNo;
+        this.bookingNo = bookingNo;//generated
         this.flightNo = flightNo;
         this.bookedSeats = bookedSeats;
         this.adultNo = adultNo;
         this.childNo = childNo;
         this.price = price;
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = purchaseDate;//generated
         this.seatClassType = seatClassType;
         this.inFlightWiFi = inFlightWiFi;
         this.inFlightFoodAndDrinks = inFlightFoodAndDrinks;

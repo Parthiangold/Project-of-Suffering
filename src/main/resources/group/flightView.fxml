@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.frontend.flightController">
+   <children>
+      <Label layoutY="-1.0" text="FlyDreamAir Customer Management System">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </Label>
+      <Label layoutX="80.0" layoutY="60.0" text="Book Flight">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="addSeatButton" layoutX="357.0" layoutY="410.0" mnemonicParsing="false" onAction="#addSeat" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #1f8bff;" text="Add Seat" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="620.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #114680; -fx-background-radius: 0;" text="Logout" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitButton" layoutX="710.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ff5656; -fx-background-radius: 0;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="backButton" layoutY="560.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #114680; -fx-background-radius: 0;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="flightDisplay" layoutX="80.0" layoutY="125.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="seatingDisplay" layoutX="80.0" layoutY="275.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="95.0" text="Flight Details:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="245.0" text="Seating Details:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="payBookingButton" layoutX="514.0" layoutY="460.0" mnemonicParsing="false" onAction="#payBooking" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #1f8bff;" text="Pay Booking" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="removeSeatButton" layoutX="357.0" layoutY="460.0" mnemonicParsing="false" onAction="#removeSeat" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #1f8bff;" text="Remove Seat" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="wifiCheckbox" layoutX="514.0" layoutY="370.0" mnemonicParsing="false" onAction="#checkWifi" text="In-Flight Wifi: $5">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="fndCheckbox" layoutX="514.0" layoutY="400.0" mnemonicParsing="false" onAction="#checkFnd" text="In-Flight Food &amp; Drinks: $10">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <ListView fx:id="availableSeatList" layoutX="80.0" layoutY="370.0" prefHeight="132.0" prefWidth="118.0" />
+      <ListView fx:id="selectedSeatList" layoutX="224.0" layoutY="370.0" prefHeight="132.0" prefWidth="118.0" />
+      <Label layoutX="514.0" layoutY="340.0" text="Select In-Flight Services:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="340.0" text="Available Seats:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="340.0" text="Selected Seats:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorMessage" layoutX="514.0" layoutY="430.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="numberMessage" layoutX="357.0" layoutY="380.0" prefHeight="20.0" prefWidth="140.0" text="# of Seats to Add: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
