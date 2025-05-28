@@ -79,8 +79,8 @@ public class Seating implements MyFileIO {
     }
 
     // Gets the list of available seats
-    public void getAvailableSeats() {
-        //e
+    public List<String> getAvailableSeats() {
+        return availableSeats;
     }
 
     // String output of an object
@@ -91,5 +91,25 @@ public class Seating implements MyFileIO {
         + "Child Price: %.2f\n"
         + "Available Number of Seats: %d\n"
         + "Available Seats: %s", flightNo, seatClassType, adultPricing, childPricing, availableNo, availableSeats);
+    }
+
+    // Marks a seat as booked by removing it from the availableSeats list
+    public void markSeatAsBooked(String seat) {
+        if (availableSeats.contains(seat)) {
+            availableSeats.remove(seat);
+            availableNo--; // Decrement available seat count
+        } else {
+            System.out.println("Seat " + seat + " is already booked or does not exist.");
+        }
+    }
+
+    // Marks a seat as available by adding it back to the availableSeats list
+    public void markSeatAsAvailable(String seat) {
+        if (!availableSeats.contains(seat)) {
+            availableSeats.add(seat);
+            availableNo++; // Increment available seat count
+        } else {
+            System.out.println("Seat " + seat + " is already available.");
+        }
     }
 }

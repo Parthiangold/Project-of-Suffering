@@ -8,9 +8,9 @@ public class Booking implements MyFileIO {
     private double price;
     private String purchaseDate;
     private int bookingNo;
-    private String seatClassType;
-    private String flightNo;
-    private String[] bookedSeats;
+    public String seatClassType;
+    public String flightNo;
+    public String[] bookedSeats;
     private boolean inFlightWiFi;
     private boolean inFlightFoodAndDrinks;
 
@@ -88,6 +88,21 @@ public class Booking implements MyFileIO {
     // Get Booking number method
     public int getBookingNo() {
         return bookingNo;
+    }
+
+    // Getter method for seatClassType
+    public String getSeatClassType() {
+        return seatClassType;
+    }
+
+    // Getter method for in-flight Wi-Fi
+    public boolean isInFlightWiFi() {
+        return inFlightWiFi;
+    }
+
+    // Getter method for in-flight food and drinks
+    public boolean isInFlightFoodAndDrinks() {
+        return inFlightFoodAndDrinks;
     }
 
     //Setter method for seat listing
