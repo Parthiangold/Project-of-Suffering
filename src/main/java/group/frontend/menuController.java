@@ -232,6 +232,13 @@ public class menuController {
         else {
             try {
                 int bookingID = Integer.parseInt(bookingInput.getText());
+
+                // For newly created accounts, there are no bookings yet, therefore the user is alerted that they have no bookings to their account
+                if (bookings.size() == 0) {
+                    errorMessageManage.setText("There are no bookings under this account.");
+                }
+                
+                // For-loop that checks in the bookings ArrayList for the inputted Booking ID
                 for (int i = 0; i < bookings.size(); i++) {
                     bookingObj = bookings.get(i);
                     
@@ -250,6 +257,7 @@ public class menuController {
             }
         }
 
+        // If a result is retrieved, the display is switched to the bookingView
         if (result) {
             switchToBookingView(bookingObj);
         }

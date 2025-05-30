@@ -1,8 +1,7 @@
 package group.frontend;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -64,8 +63,7 @@ public class loginController {
     // Authorises customer login details before proceeding with booking management and searches
     @FXML
     public void login() throws IOException {
-        boolean authorised = false;
-        Customer customerObj = null;
+        // Email and password inputs are retrieved
         String email = emailInput.getText();
         String password = passwordHashing(passwordInput.getText());
 
@@ -77,12 +75,11 @@ public class loginController {
         else { 
             // For-loop first checks to see if there's a matching email
             for (int i = 0; i < customers.size(); i++) {
-                customerObj = customers.get(i);
+                Customer customerObj = customers.get(i);
 
                 // If there is a matching email, the inputted password is compared to what is stored under their details
                 if (email.equals(customerObj.getEmail()) && password.equals(customerObj.getPassword())) {
                     // If it matches, the user is authorised, loads the booking file of the user and switches to the menu display
-                    authorised = true;
                     cNum = customerObj.getCustomerNo();
                     MainApplication.getApplicationInstance().setCNum(cNum);
                     loadBookings(cNum);
@@ -127,11 +124,10 @@ public class loginController {
 
     // Loads the data from bookings_<CustomerNo>.txt and stores the data in the Booking Class
     public void loadBookings(int customerNo) {
-        
+        // Reads the bookings txt file based on the authorised customer's number
+        String customerFile = "/group/bookings_" + Integer.toString(customerNo) + ".txt";
+        InputStream filename = getClass().getResourceAsStream(customerFile);
         try {
-            // Reads the bookings txt file based on the authorised customer's number
-            String customerFile = "src/main/resources/group/bookings_" + Integer.toString(customerNo) + ".txt";
-            File filename = new File(customerFile);
             Scanner reader = new Scanner(filename);
             reader.useDelimiter(",|\r\n|\n");
 
@@ -142,16 +138,12 @@ public class loginController {
                 bookings.add(bookingObj);
             }
             reader.close();
-        }
-
-        // Catches error if "bookings_<customerNo>.txt" isn't found
-        catch (FileNotFoundException e) {
-            System.out.println("Error 404: file 'bookings.txt' not found.");
-            e.printStackTrace();
+        } catch (NullPointerException e) {
+           System.out.println("New booking file will be created on program stop.");
         }
     }
 
-    // Sign up for an account
+    // Changes to signUpView, where the user may sign up an account
     @FXML
     private void signUp() throws IOException {
         SceneSelector selector = new SceneSelector(customers, flights, seatings, bookings, cNum);

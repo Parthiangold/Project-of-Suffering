@@ -67,6 +67,7 @@ public class bookingController {
         this.bookingObj = bookingObj;
     }
 
+    // Displays the booking info on initialisation
     @FXML
     public void initialize() {
         displayBooking();
@@ -278,6 +279,7 @@ public class bookingController {
                 .filter(b -> b.getBookingNo() == bookingObj.getBookingNo())
                 .findFirst();
 
+        // Checks to see if the booking is present, then proceeds to remove the booking from the ArrayList
         if (bookingToRemove.isPresent()) {
             bookings.remove(bookingToRemove.get());
             System.out.println("Booking cancelled successfully.");

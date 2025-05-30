@@ -74,9 +74,10 @@ public class signUpController {
 		selector.selectScene("/group/loginView.fxml", exitButton.getScene());
     }
 
+    // Activated when the user clicks the "sign up" button
     @FXML
     void signUp(ActionEvent event) throws IOException {
-        // Hashing begins
+        // Input password is retrieved and sent to the "createPassword" method for hashing
         String hashtext = createPassword(passwordInput.getText());
 
         // New customer object is created
@@ -88,33 +89,30 @@ public class signUpController {
         back();
     }
 
+    // Converts user input into SHA-512 to store their created password in the customers ArrayList
     public String createPassword(String password) {
         String hashtext = "";
         try {
-            // getInstance() method is called with algorithm SHA-512
+            // SHA-512 algorithm is called and used to return the byte array of the user input
             MessageDigest md = MessageDigest.getInstance("SHA-512");
-
-            // digest() method is called
-            // to calculate message digest of the input string
-            // returned as array of byte
             byte[] messageDigest = md.digest(password.getBytes());
 
-            // Convert byte array into signum representation
+            // Byte array is stored as a BigInteger object and then converted into a hex value (hashing)
             BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value
             hashtext = no.toString(16);
 
-            // Ensure the hash is padded to 128 characters
+            // Ensures the length of the hash is 128 characters before returning the hashed user input
             while (hashtext.length() < 128) {
                 hashtext = "0" + hashtext;
             }
+            
+            // Returns the hashed password, which is to be stored in the customers ArrayList
+            return hashtext;
         }
-        // For specifying wrong message digest algorithms
+
+        // Catches error if an invalid message digest algorithm is used
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-
-        return hashtext;
     }
 }

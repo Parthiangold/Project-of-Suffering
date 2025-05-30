@@ -58,6 +58,7 @@ public class resultsController {
         this.child = child;
     }
 
+    // Shows search results of returned flights once controller is initialised
     @FXML
     public void initialize() throws IOException {
         displayResults();
@@ -162,7 +163,6 @@ public class resultsController {
         // After the loop, the VBox is cleared (to prevent any duplicates from the previous load) and then the buttons from the buttonlist is added to the VBox
         resultsBox.getChildren().clear();
         resultsBox.getChildren().addAll(buttonlist);
-            
         }
     }
 

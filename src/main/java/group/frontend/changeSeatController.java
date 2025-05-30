@@ -78,6 +78,7 @@ public class changeSeatController {
         this.bookingObj = bookingObj;
     }
 
+    // Available and currently selected seatings are loaded and displayed on initialisation
     @FXML
     public void initialize() {
         // Gets adult, child, and seating object values
@@ -218,9 +219,8 @@ public class changeSeatController {
         numberMessage.setText("# of Seats to Add: " + (adult + child - sSeatList.size()));
     }
 
-    // 
+    // Seats are added into the 2 ListViews based on the selected seating class type in the ComboBox
     private void populateSeatOptions(String selectedClass) {
-
         // Retrieve new seatingObj based on selected class type
         for (int i = 0; i < seatings.size(); i++) {
             seatingObj = seatings.get(i);

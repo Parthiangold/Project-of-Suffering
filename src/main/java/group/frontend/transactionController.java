@@ -212,10 +212,18 @@ public class transactionController {
     // Booking is added, and the stored seating object that was booked is modified to remove the seats that were booked
     @FXML
     public void confirmBooking() throws IOException {
-        // Appends the newly created booking to the bookings ArrayList
-        int bookingNo = (bookings.get(bookings.size()-1).getBookingNo()) + 1;
+        // Gives the new booking an ID
+        int bookingNo = 1;
+        try {
+            bookingNo = (bookings.get(bookings.size()-1).getBookingNo()) + 1;
+        } catch (IndexOutOfBoundsException e) {
+            bookingNo = 1;
+        }
+        // Date of purchase is retrieved
         LocalDate today = LocalDate.now();
         String date = today.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        // Booking is created and added to the bookings ArrayList
         Booking newBooking = new Booking(bookingNo, flightObj.getFlightNo(), bookedSeats, adult, child, price, date, seatingObj.getSeatClassType(), inFlightWiFi, inFlightFoodAndDrinks);
         bookings.add(newBooking);
 

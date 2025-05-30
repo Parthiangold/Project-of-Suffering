@@ -97,6 +97,7 @@ public class flightController {
         this.inFlightFoodAndDrinks = false;
     }
 
+    // Shows details of the flight and sets label text on controller initialisation
     @FXML
     public void initialize() {
         displayFlightDetails();
@@ -165,8 +166,11 @@ public class flightController {
     // Displays further details about the flight and seating
     @FXML
     public void displayFlightDetails() {
+        // Sets labels to display flight and seating info
         flightDisplay.setText(flightObj.overviewString());
         seatingDisplay.setText(seatingObj.overviewString());
+
+        // Adds the available seats listed in the seatingObj into the ListView for available seats
         for (int i = 0; i < seatingObj.getAvailableSeats().size(); i++) {
             String seat = seatingObj.getAvailableSeats().get(i);
             aSeatList.add(seat);
@@ -177,40 +181,48 @@ public class flightController {
     // Adds the selected seat to the selected seats list
     @FXML
     public void addSeat() {
+        // Error message appears if user has already selected the max amount of seats
         if ((adult + child - sSeatList.size()) == 0) {
             errorMessage.setText("No more seats can be selected.");
         } else {
             String selectedSeat = availableSeatList.getSelectionModel().getSelectedItem();
             int selectedID = availableSeatList.getSelectionModel().getSelectedIndex();
+            // If user hasn't selected a seat, then an error message appears prompting the user to do so
             if (selectedSeat == null) {
                 errorMessage.setText("Select a seat in the list first.");
             } else {
+                // Selected seat is added to the ListView for selected seats and removed from the ListView for available seats
                 selectedSeatList.getItems().add(selectedSeat);
                 sSeatList.add(selectedSeat);
                 availableSeatList.getItems().remove(selectedID);
                 aSeatList.remove(selectedID);
             }
         }
+        // Label for showing remaining seats to add is updated
         numberMessage.setText("# of Seats to Add: " + (adult + child - sSeatList.size()));
     }
 
     // Removes the selected seat from the selected seats list
     @FXML
     public void removeSeat() {
+        // Error message appears if user doesn't have seats left in the seating list
         if ((sSeatList.size() == 0)) {
             errorMessage.setText("No more seats can be removed.");
         } else {
             String selectedSeat = selectedSeatList.getSelectionModel().getSelectedItem();
             int selectedID = selectedSeatList.getSelectionModel().getSelectedIndex();
+            // If user hasn't selected a seat, then an error message appears prompting the user to do so
             if (selectedSeat == null) {
                 errorMessage.setText("Select a seat in the list first.");
             } else {
+                // Selected seat is added to the ListView for available seats and removed from the ListView for selected seats
                 availableSeatList.getItems().add(selectedSeat);
                 aSeatList.add(selectedSeat);
                 selectedSeatList.getItems().remove(selectedID);
                 sSeatList.remove(selectedID);
             }
         }
+        // Label for showing remaining seats to add is updated
         numberMessage.setText("# of Seats to Add: " + (adult + child - sSeatList.size()));
     }
 
@@ -253,7 +265,9 @@ public class flightController {
                 price += 10;
             }
             switchToTransactionView(bookedSeats, price);
-        } else {
+        } 
+        // If the user hasn't selected the number of seats equal to the inputted number of people boarding, an error message returns
+        else {
             errorMessage.setText("You must select enough seats.");
         }
     }
