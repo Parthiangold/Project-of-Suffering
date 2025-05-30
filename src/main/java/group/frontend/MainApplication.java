@@ -10,8 +10,9 @@ import group.backend.Booking;
 import group.backend.Customer;
 import group.backend.Flight;
 import group.backend.Seating;
-import java.io.File;
+
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -114,74 +115,51 @@ public class MainApplication extends Application {
     }
 
     // Loads the data from "customers.txt" and stores the data under the "Customer" class
-    public void loadCustomers() {
-        try {
-            // Reads "customers.txt"
-            File filename = new File("src/main/resources/group/customers.txt");
-            Scanner reader = new Scanner(filename);
-            reader.useDelimiter(",|\r\n|\n");
+    public void loadCustomers() throws FileNotFoundException {
+        // Reads "customers.txt"
+        InputStream filename = getClass().getResourceAsStream("/group/customers.txt");
+        Scanner reader = new Scanner(filename);
+        reader.useDelimiter(",|\r\n|\n");
 
-            // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
-            while (reader.hasNext()) {
-                Customer customerObj = new Customer();
-                customerObj.inputData(reader);
-                customers.add(customerObj);
-            }
-            reader.close();
+        // For each line in the file, a new "Customer" object is created and has data inputted from the file and added to "customers"
+        while (reader.hasNext()) {
+            Customer customerObj = new Customer();
+            customerObj.inputData(reader);
+            customers.add(customerObj);
         }
-
-        // Catches error if "customers.txt" isn't found
-        catch (FileNotFoundException e) {
-            System.out.println("Error 404: file 'customers.txt' not found.");
-            e.printStackTrace();
-        }
+        reader.close();
     }
 
     // Loads the data from "seatings.txt" and stores the data under the "Seating" class
-    public void loadSeatings() {
-        try {
-            // Reads "seatings.txt"
-            File filename = new File("src/main/resources/group/seatings.txt");
-            Scanner reader = new Scanner(filename);
-            reader.useDelimiter(",|\r\n|\n");
+    public void loadSeatings() throws FileNotFoundException {
+        // Reads "seatings.txt"
+        InputStream filename = getClass().getResourceAsStream("/group/seatings.txt");
+        Scanner reader = new Scanner(filename);
+        reader.useDelimiter(",|\r\n|\n");
 
-            // For each line in the file, a new "Seating" object is created and has data inputted from the file and added to "seatings"
-            while (reader.hasNext()) {
-                Seating seatingObj = new Seating();
-                seatingObj.inputData(reader);
-                seatings.add(seatingObj);
-            }
-            reader.close();
+        // For each line in the file, a new "Seating" object is created and has data inputted from the file and added to "seatings"
+        while (reader.hasNext()) {
+            Seating seatingObj = new Seating();
+            seatingObj.inputData(reader);
+            seatings.add(seatingObj);
         }
-
-        // Catches error if "seatings.txt" isn't found
-        catch (FileNotFoundException e) {
-            System.out.println("Error 404: file 'seatings.txt' not found.");
-            e.printStackTrace();
-        }
+        reader.close();
     }
 
     // Loads the data from flights.txt and stores the data in the Flight Class
-    public void loadFlights() {
-        try {
-            File filename = new File("src/main/resources/group/flights.txt");
-            Scanner reader = new Scanner(filename);
-            reader.useDelimiter(",|\r\n|\n");
-            while (reader.hasNext()) {
-                Flight flightObj = new Flight();
-                flightObj.inputData(reader);
-                flights.add(flightObj);
-            }
-            reader.close();
-
+    public void loadFlights() throws FileNotFoundException {
+        // Reads "flights.txt"
+        InputStream filename = getClass().getResourceAsStream("/group/flights.txt");
+        Scanner reader = new Scanner(filename);
+        reader.useDelimiter(",|\r\n|\n");
+        
+        // For each line in the file, a new "Flight" object is created and has data inputted from the file and added to "flights"
+        while (reader.hasNext()) {
+            Flight flightObj = new Flight();
+            flightObj.inputData(reader);
+            flights.add(flightObj);
         }
-
-        // Catches error if "flights.txt" isn't found
-        catch (FileNotFoundException e) {
-            System.out.println("Error 404: file 'flights.txt' not found.");
-            e.printStackTrace();
-        }
-
+        reader.close();
     }
 
     public static void main(String[] args) {

@@ -42,6 +42,7 @@ public class receiptController {
         this.cNum = cNum;
     }
 
+    // Displays the created booking on initialisation
     @FXML
     public void initialize() {
         Booking bookingObj = bookings.get(bookings.size() - 1);
